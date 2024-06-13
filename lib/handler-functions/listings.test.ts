@@ -57,3 +57,9 @@ describe("Listings Matcher", () => {
   //   expect(thisShouldFail).toThrow(MatchingError);
   // });
 });
+describe("Get an Individual Listing", () => {
+  test("Successfully gets a listing", () => {
+    const url = "https://doorway";
+    let li = new ListingsInterface(url);
+  });
+});

@@ -1,0 +1,1144 @@
+{
+  "id": "f7899383-c280-47c8-99e3-8e89ec2e9fd4",
+  "createdAt": "2024-05-14T20:37:18.539Z",
+  "updatedAt": "2024-06-04T21:44:25.659Z",
+  "additionalApplicationSubmissionNotes": null,
+  "digitalApplication": true,
+  "commonDigitalApplication": false,
+  "paperApplication": false,
+  "referralOpportunity": false,
+  "accessibility": null,
+  "amenities": "The property features a sizeable multi-purpose room oriented to the courtyard for residents to enjoy. There are offices for resident\nservices and property management.\nThere is also a spacious outdoor courtyard with new landscaping, patio paving, and seating for residents.",
+  "buildingTotalUnits": 0,
+  "developer": "EAH Housing",
+  "householdSizeMax": 0,
+  "householdSizeMin": 0,
+  "neighborhood": null,
+  "petPolicy": null,
+  "smokingPolicy": null,
+  "unitsAvailable": 0,
+  "unitAmenities": null,
+  "servicesOffered": null,
+  "yearBuilt": 2024,
+  "applicationDueDate": "2024-06-27T23:00:00.000Z",
+  "applicationOpenDate": "2024-05-14T20:28:09.406Z",
+  "applicationFee": null,
+  "applicationOrganization": null,
+  "applicationPickUpAddressOfficeHours": null,
+  "applicationPickUpAddressType": null,
+  "applicationDropOffAddressOfficeHours": null,
+  "applicationDropOffAddressType": null,
+  "applicationMailingAddressType": null,
+  "buildingSelectionCriteria": null,
+  "costsNotIncluded": null,
+  "creditHistory": null,
+  "criminalBackground": "If you are selected from the waitlist, you will be required to submit to a criminal background screening.",
+  "depositMin": "0",
+  "depositMax": "0",
+  "depositHelperText": "or one month's rent may be higher for lower credit scores",
+  "disableUnitsAccordion": true,
+  "leasingAgentEmail": "ie@contracostahousing.org",
+  "leasingAgentName": "Housing Authority of Contra Costa County",
+  "leasingAgentOfficeHours": "Monday, Tuesday, Thursday – 10:00am – 4:00pm\nWednesday – 8:00am – 4:30pm",
+  "leasingAgentPhone": "(925) 957-7001",
+  "leasingAgentTitle": null,
+  "name": "Nevin Plaza",
+  "postmarkedApplicationsReceivedByDate": null,
+  "programRules": "At least one family member must be a citizen, national, or non-citizen with eligible immigration status in order for the family to qualify for any level of assistance.",
+  "rentalAssistance": "Section 8 Project Based Vouchers. The Contra Costa Housing Authority operates the Project Based Voucher (PBV) Program, which is a component of the Housing Choice Voucher Program. The PBV Program allows applicants to receive rental assistance while living in a unit specified above. Through the PBV Program, the rental assistance is attached to the unit for up to forty years.",
+  "rentalHistory": null,
+  "requiredDocuments": null,
+  "specialNotes": null,
+  "waitlistCurrentSize": null,
+  "waitlistMaxSize": null,
+  "whatToExpect": "Follow the 'Apply Online' button above to apply to this property's wait list. The button will take you to Contra Costa County Housing Authority's applicant portal. You will need to register if you do not already have an account on Contra Costa County Housing Authority's applicant portal.",
+  "status": "active",
+  "reviewOrderType": "waitlist",
+  "displayWaitlistSize": false,
+  "reservedCommunityDescription": null,
+  "reservedCommunityMinAge": null,
+  "resultLink": null,
+  "isWaitlistOpen": false,
+  "waitlistOpenSpots": null,
+  "customMapPin": false,
+  "publishedAt": "2024-06-04T21:44:25.654Z",
+  "closedAt": null,
+  "afsLastRunAt": "2024-05-14T21:00:04.078Z",
+  "lastApplicationUpdateAt": "1970-01-01T00:00:00.000Z",
+  "listingMultiselectQuestions": [],
+  "applicationMethods": [
+    {
+      "id": "bc823d23-e946-4eff-8a5a-165d1885ec2c",
+      "createdAt": "2024-06-04T21:44:25.659Z",
+      "updatedAt": "2024-06-04T21:44:25.659Z",
+      "type": "ExternalLink",
+      "label": null,
+      "externalReference": "https://hacccportal.securecafe.com/onlineleasing/haccc-live/guestlogin.aspx?",
+      "acceptsPostmarkedApplications": null,
+      "phoneNumber": null,
+      "paperApplications": []
+    }
+  ],
+  "assets": [],
+  "listingEvents": [],
+  "listingsBuildingAddress": {
+    "id": "55e16bb2-7177-4485-8f08-8ad6dc617434",
+    "createdAt": "2024-05-14T20:37:18.539Z",
+    "updatedAt": "2024-06-04T21:44:25.651Z",
+    "placeName": null,
+    "city": "Richmond",
+    "county": "Contra Costa",
+    "state": "CA",
+    "street": "2400 Nevin Avenue",
+    "street2": null,
+    "zipCode": "94804",
+    "latitude": 37.93644,
+    "longitude": -122.34568
+  },
+  "listingsApplicationPickUpAddress": null,
+  "listingsApplicationDropOffAddress": null,
+  "listingsApplicationMailingAddress": null,
+  "listingsLeasingAgentAddress": {
+    "id": "1317a7d9-bf84-492b-b6d7-2c657cbfe14e",
+    "createdAt": "2024-05-30T21:48:15.063Z",
+    "updatedAt": "2024-06-04T21:44:25.647Z",
+    "placeName": null,
+    "city": "San Pablo",
+    "county": null,
+    "state": "CA",
+    "street": "2324 College Lane",
+    "street2": null,
+    "zipCode": "94806",
+    "latitude": null,
+    "longitude": null
+  },
+  "listingsBuildingSelectionCriteriaFile": null,
+  "jurisdictions": {
+    "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+    "name": "Contra Costa"
+  },
+  "listingsResult": null,
+  "reservedCommunityTypes": {
+    "id": "3aab1e1d-bbe6-4392-b545-c97de561fa60",
+    "name": "senior62"
+  },
+  "listingImages": [
+    {
+      "assets": {
+        "id": "7ee4d34c-d923-457e-ab80-ea7d1f641f50",
+        "createdAt": "2024-05-14T20:37:18.539Z",
+        "updatedAt": "2024-05-14T20:37:18.539Z",
+        "fileId": "https://doorway-prod-public-uploads20230613223910125400000002.s3.us-west-1.amazonaws.com/assets/274785/building/Nevin Plaza 1_rehab.jpg",
+        "label": "cloudinaryBuilding"
+      },
+      "ordinal": 0
+    }
+  ],
+  "listingFeatures": null,
+  "listingUtilities": null,
+  "units": [
+    {
+      "id": "2ca48eff-53ab-4ce5-9599-67c4f214c4ac",
+      "createdAt": "2024-06-04T21:44:25.659Z",
+      "updatedAt": "2024-06-04T21:44:25.659Z",
+      "amiChart": {
+        "id": "d1507fd1-57ab-4f67-8be5-ff63d9a4eaf7",
+        "createdAt": "2023-06-23T16:15:03.218Z",
+        "updatedAt": "2023-06-23T16:15:03.218Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 51800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 59200
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 66600
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 73950
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 79900
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 85800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 91700
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 97650
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 1,
+            "income": 62160
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 2,
+            "income": 71040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 3,
+            "income": 79920
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 4,
+            "income": 88740
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 5,
+            "income": 95880
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 6,
+            "income": 102960
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 7,
+            "income": 110040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 8,
+            "income": 117180
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 1,
+            "income": 78550
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 2,
+            "income": 89750
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 3,
+            "income": 100950
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 4,
+            "income": 112150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 5,
+            "income": 121150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 6,
+            "income": 130100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 7,
+            "income": 139100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 8,
+            "income": 148050
+          }
+        ],
+        "name": "Contra Costa - HUD",
+        "jurisdictions": {
+          "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+          "name": "Contra Costa"
+        }
+      },
+      "amiPercentage": "50",
+      "annualIncomeMin": null,
+      "monthlyIncomeMin": "0",
+      "floor": null,
+      "annualIncomeMax": null,
+      "maxOccupancy": 5,
+      "minOccupancy": 2,
+      "monthlyRent": null,
+      "numBathrooms": 1,
+      "numBedrooms": 2,
+      "number": "",
+      "sqFeet": null,
+      "monthlyRentAsPercentOfIncome": "30",
+      "bmrProgramChart": null,
+      "unitTypes": {
+        "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "twoBdrm",
+        "numBedrooms": 2
+      },
+      "unitRentTypes": null,
+      "unitAccessibilityPriorityTypes": null,
+      "unitAmiChartOverrides": {
+        "id": "42cff690-3e30-404a-b417-db8422793881",
+        "createdAt": "2024-06-04T21:44:25.659Z",
+        "updatedAt": "2024-06-04T21:44:25.659Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 54500
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 62300
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 70100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 77850
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 84100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 90350
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 96550
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 102800
+          }
+        ]
+      }
+    },
+    {
+      "id": "ec5ba330-5dc8-43e7-89d8-a065b815cd50",
+      "createdAt": "2024-06-04T21:44:25.659Z",
+      "updatedAt": "2024-06-04T21:44:25.659Z",
+      "amiChart": {
+        "id": "d1507fd1-57ab-4f67-8be5-ff63d9a4eaf7",
+        "createdAt": "2023-06-23T16:15:03.218Z",
+        "updatedAt": "2023-06-23T16:15:03.218Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 51800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 59200
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 66600
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 73950
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 79900
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 85800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 91700
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 97650
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 1,
+            "income": 62160
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 2,
+            "income": 71040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 3,
+            "income": 79920
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 4,
+            "income": 88740
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 5,
+            "income": 95880
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 6,
+            "income": 102960
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 7,
+            "income": 110040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 8,
+            "income": 117180
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 1,
+            "income": 78550
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 2,
+            "income": 89750
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 3,
+            "income": 100950
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 4,
+            "income": 112150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 5,
+            "income": 121150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 6,
+            "income": 130100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 7,
+            "income": 139100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 8,
+            "income": 148050
+          }
+        ],
+        "name": "Contra Costa - HUD",
+        "jurisdictions": {
+          "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+          "name": "Contra Costa"
+        }
+      },
+      "amiPercentage": "50",
+      "annualIncomeMin": null,
+      "monthlyIncomeMin": "0",
+      "floor": null,
+      "annualIncomeMax": null,
+      "maxOccupancy": 3,
+      "minOccupancy": 1,
+      "monthlyRent": null,
+      "numBathrooms": 1,
+      "numBedrooms": 1,
+      "number": "",
+      "sqFeet": null,
+      "monthlyRentAsPercentOfIncome": "30",
+      "bmrProgramChart": null,
+      "unitTypes": {
+        "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "oneBdrm",
+        "numBedrooms": 1
+      },
+      "unitRentTypes": null,
+      "unitAccessibilityPriorityTypes": null,
+      "unitAmiChartOverrides": {
+        "id": "49c0c6d5-6168-4fc0-9abc-c4e3f310f5e0",
+        "createdAt": "2024-06-04T21:44:25.659Z",
+        "updatedAt": "2024-06-04T21:44:25.659Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 54500
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 62300
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 70100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 77850
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 84100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 90350
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 96550
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 102800
+          }
+        ]
+      }
+    },
+    {
+      "id": "26ef9a9a-4fd9-4613-abce-da53f9075084",
+      "createdAt": "2024-06-04T21:44:25.659Z",
+      "updatedAt": "2024-06-04T21:44:25.659Z",
+      "amiChart": {
+        "id": "d1507fd1-57ab-4f67-8be5-ff63d9a4eaf7",
+        "createdAt": "2023-06-23T16:15:03.218Z",
+        "updatedAt": "2023-06-23T16:15:03.218Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 51800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 59200
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 66600
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 73950
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 79900
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 85800
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 91700
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 97650
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 1,
+            "income": 62160
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 2,
+            "income": 71040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 3,
+            "income": 79920
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 4,
+            "income": 88740
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 5,
+            "income": 95880
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 6,
+            "income": 102960
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 7,
+            "income": 110040
+          },
+          {
+            "percentOfAmi": 60,
+            "householdSize": 8,
+            "income": 117180
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 1,
+            "income": 78550
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 2,
+            "income": 89750
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 3,
+            "income": 100950
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 4,
+            "income": 112150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 5,
+            "income": 121150
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 6,
+            "income": 130100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 7,
+            "income": 139100
+          },
+          {
+            "percentOfAmi": 80,
+            "householdSize": 8,
+            "income": 148050
+          }
+        ],
+        "name": "Contra Costa - HUD",
+        "jurisdictions": {
+          "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+          "name": "Contra Costa"
+        }
+      },
+      "amiPercentage": "50",
+      "annualIncomeMin": null,
+      "monthlyIncomeMin": "0",
+      "floor": null,
+      "annualIncomeMax": null,
+      "maxOccupancy": 2,
+      "minOccupancy": 1,
+      "monthlyRent": null,
+      "numBathrooms": 1,
+      "numBedrooms": null,
+      "number": "",
+      "sqFeet": null,
+      "monthlyRentAsPercentOfIncome": "30",
+      "bmrProgramChart": null,
+      "unitTypes": {
+        "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "studio",
+        "numBedrooms": 0
+      },
+      "unitRentTypes": null,
+      "unitAccessibilityPriorityTypes": null,
+      "unitAmiChartOverrides": {
+        "id": "a6a995b2-e58d-40e8-bb06-be849b4e58fe",
+        "createdAt": "2024-06-04T21:44:25.659Z",
+        "updatedAt": "2024-06-04T21:44:25.659Z",
+        "items": [
+          {
+            "percentOfAmi": 50,
+            "householdSize": 1,
+            "income": 54500
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 2,
+            "income": 62300
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 3,
+            "income": 70100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 4,
+            "income": 77850
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 5,
+            "income": 84100
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 6,
+            "income": 90350
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 7,
+            "income": 96550
+          },
+          {
+            "percentOfAmi": 50,
+            "householdSize": 8,
+            "income": 102800
+          }
+        ]
+      }
+    }
+  ],
+  "unitsSummarized": {
+    "unitTypes": [
+      {
+        "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "twoBdrm",
+        "numBedrooms": 2
+      },
+      {
+        "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "oneBdrm",
+        "numBedrooms": 1
+      },
+      {
+        "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+        "createdAt": "2023-06-14T01:54:45.775Z",
+        "updatedAt": "2023-06-14T01:54:45.775Z",
+        "name": "studio",
+        "numBedrooms": 0
+      }
+    ],
+    "priorityTypes": [],
+    "amiPercentages": ["50"],
+    "byUnitTypeAndRent": [
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 1,
+          "max": 2
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "studio",
+          "numBedrooms": 0
+        },
+        "totalAvailable": 0
+      },
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 1,
+          "max": 3
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "oneBdrm",
+          "numBedrooms": 1
+        },
+        "totalAvailable": 0
+      },
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 2,
+          "max": 5
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "twoBdrm",
+          "numBedrooms": 2
+        },
+        "totalAvailable": 0
+      }
+    ],
+    "byUnitType": [
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 1,
+          "max": 2
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "studio",
+          "numBedrooms": 0
+        },
+        "totalAvailable": 0
+      },
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 1,
+          "max": 3
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "oneBdrm",
+          "numBedrooms": 1
+        },
+        "totalAvailable": 0
+      },
+      {
+        "areaRange": {
+          "min": null,
+          "max": null
+        },
+        "minIncomeRange": {
+          "min": "$0",
+          "max": "$0"
+        },
+        "occupancyRange": {
+          "min": 2,
+          "max": 5
+        },
+        "rentRange": {
+          "min": "t.n/a",
+          "max": "t.n/a"
+        },
+        "rentAsPercentIncomeRange": {
+          "min": 30,
+          "max": 30
+        },
+        "floorRange": {
+          "min": null,
+          "max": null
+        },
+        "unitTypes": {
+          "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+          "createdAt": "2023-06-14T01:54:45.775Z",
+          "updatedAt": "2023-06-14T01:54:45.775Z",
+          "name": "twoBdrm",
+          "numBedrooms": 2
+        },
+        "totalAvailable": 0
+      }
+    ],
+    "byAMI": [
+      {
+        "percent": "50",
+        "byUnitType": [
+          {
+            "areaRange": {
+              "min": null,
+              "max": null
+            },
+            "minIncomeRange": {
+              "min": "$0",
+              "max": "$0"
+            },
+            "occupancyRange": {
+              "min": 1,
+              "max": 2
+            },
+            "rentRange": {
+              "min": "t.n/a",
+              "max": "t.n/a"
+            },
+            "rentAsPercentIncomeRange": {
+              "min": 30,
+              "max": 30
+            },
+            "floorRange": {
+              "min": null,
+              "max": null
+            },
+            "unitTypes": {
+              "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+              "createdAt": "2023-06-14T01:54:45.775Z",
+              "updatedAt": "2023-06-14T01:54:45.775Z",
+              "name": "studio",
+              "numBedrooms": 0
+            },
+            "totalAvailable": 0
+          },
+          {
+            "areaRange": {
+              "min": null,
+              "max": null
+            },
+            "minIncomeRange": {
+              "min": "$0",
+              "max": "$0"
+            },
+            "occupancyRange": {
+              "min": 1,
+              "max": 3
+            },
+            "rentRange": {
+              "min": "t.n/a",
+              "max": "t.n/a"
+            },
+            "rentAsPercentIncomeRange": {
+              "min": 30,
+              "max": 30
+            },
+            "floorRange": {
+              "min": null,
+              "max": null
+            },
+            "unitTypes": {
+              "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+              "createdAt": "2023-06-14T01:54:45.775Z",
+              "updatedAt": "2023-06-14T01:54:45.775Z",
+              "name": "oneBdrm",
+              "numBedrooms": 1
+            },
+            "totalAvailable": 0
+          },
+          {
+            "areaRange": {
+              "min": null,
+              "max": null
+            },
+            "minIncomeRange": {
+              "min": "$0",
+              "max": "$0"
+            },
+            "occupancyRange": {
+              "min": 2,
+              "max": 5
+            },
+            "rentRange": {
+              "min": "t.n/a",
+              "max": "t.n/a"
+            },
+            "rentAsPercentIncomeRange": {
+              "min": 30,
+              "max": 30
+            },
+            "floorRange": {
+              "min": null,
+              "max": null
+            },
+            "unitTypes": {
+              "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+              "createdAt": "2023-06-14T01:54:45.775Z",
+              "updatedAt": "2023-06-14T01:54:45.775Z",
+              "name": "twoBdrm",
+              "numBedrooms": 2
+            },
+            "totalAvailable": 0
+          }
+        ]
+      }
+    ],
+    "hmi": {
+      "columns": {
+        "sizeColumn": "listings.householdSize",
+        "maxIncomeMonth": "listings.maxIncomeMonth",
+        "maxIncomeYear": "listings.maxIncomeYear"
+      },
+      "rows": [
+        {
+          "sizeColumn": 1,
+          "maxIncomeMonth": "listings.monthlyIncome*income:$4,542",
+          "maxIncomeYear": "listings.annualIncome*income:$54,500"
+        },
+        {
+          "sizeColumn": 2,
+          "maxIncomeMonth": "listings.monthlyIncome*income:$5,192",
+          "maxIncomeYear": "listings.annualIncome*income:$62,300"
+        },
+        {
+          "sizeColumn": 3,
+          "maxIncomeMonth": "listings.monthlyIncome*income:$5,842",
+          "maxIncomeYear": "listings.annualIncome*income:$70,100"
+        },
+        {
+          "sizeColumn": 4,
+          "maxIncomeMonth": "listings.monthlyIncome*income:$6,488",
+          "maxIncomeYear": "listings.annualIncome*income:$77,850"
+        },
+        {
+          "sizeColumn": 5,
+          "maxIncomeMonth": "listings.monthlyIncome*income:$7,008",
+          "maxIncomeYear": "listings.annualIncome*income:$84,100"
+        }
+      ]
+    }
+  },
+  "urlSlug": "nevin_plaza_2400_nevin_avenue_richmond_ca",
+  "requestedChanges": null,
+  "requestedChangesDate": "1970-01-01T07:00:00.000Z",
+  "showWaitlist": false
+}

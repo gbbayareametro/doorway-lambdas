@@ -1,6 +1,6 @@
 module.exports = {
   testEnvironment: "node",
-  roots: ["./handlers"],
+  roots: ["lib/handler-functions"],
   testMatch: ["**/*.test.ts"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",

@@ -3,8 +3,6 @@ import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
 
 import { LotteryValidator } from "./lottery-validator";
-import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class LotteryValidationStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
