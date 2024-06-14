@@ -1,4 +1,4 @@
-import { convertToJSON, lotterySchemaValidator } from "./lottery-file-handling";
+import { convertToJSON, lotteryLineIsValid } from "./lottery-file-handling";
 
 describe("Lottery file functions tests", () => {
   test("converts lottery file to JSON", async () => {
@@ -17,7 +17,7 @@ describe("Lottery file functions tests", () => {
       "Raw Lottery Rank"
     );
     JSONOutput.forEach((jsonObject) => {
-      expect(lotterySchemaValidator(jsonObject)).toBeTruthy();
+      expect(lotteryLineIsValid(jsonObject)).toBeTruthy();
     });
   });
 });
