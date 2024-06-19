@@ -1,11 +1,12 @@
 import * as exceljs from "exceljs";
+import { ReadStream } from "fs";
 import * as joi from "joi";
 export const convertToJSON = async (
-  filePath: string,
+  stream: Uint8Array,
   worksheetName: string
 ): Promise<object[]> => {
   let workbook = new exceljs.Workbook();
-  workbook = await workbook.xlsx.readFile(filePath);
+  await workbook.xlsx.load(stream.buffer);
 
   const rows: object[] = [];
   const worksheet = workbook.getWorksheet(worksheetName);
