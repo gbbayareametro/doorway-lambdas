@@ -1,8 +1,5 @@
-export default {
-  testEnvironment: "node",
-  roots: ["lib/handler-functions"],
-  testMatch: ["**/*.test.ts"],
-  transform: {
-    "^.+\\.tsx?$": "ts-jest",
-  },
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
 };

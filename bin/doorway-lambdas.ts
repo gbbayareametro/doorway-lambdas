@@ -2,7 +2,8 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { ListingsFinderStack } from "../lib/listings-finder-stack";
-import { LotteryValidationStack } from "../lib/lottery-validation-stack";
+import { LotteryValidatorStack } from "../lib/lottery-validator-stack";
+import { PaperAppInterfaceStack } from "../lib/paper-app-interface-stack";
 
 const app = new cdk.App();
 new ListingsFinderStack(app, "ListingsFinderStack", {
@@ -17,4 +18,5 @@ new ListingsFinderStack(app, "ListingsFinderStack", {
   // env: { account: '123456789012', region: 'us-east-1' },
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
-new LotteryValidationStack(app, "LotteryValidatorStack");
+new LotteryValidatorStack(app, "LotteryValidatorStack");
+new PaperAppInterfaceStack(app, "PaperAppInterface");

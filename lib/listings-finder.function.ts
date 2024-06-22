@@ -16,6 +16,7 @@ export const handler = async (
     ? process.env.DOORWAY_API
     : "https://backend.dev.housingbayarea.mtc.ca.gov";
   const listings = new ListingsInterface(doorwayApi);
+
   const listingsQuery = event.queryStringParameters!.listingsQuery
     ? event.queryStringParameters!.listingsQuery
     : "EMPTY";
