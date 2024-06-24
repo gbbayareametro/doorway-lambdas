@@ -11,11 +11,15 @@ export const handler = async (
   context: Context
 ): Promise<APIGatewayProxyResult> => {
   const logger = instance;
-  logger.debug(event);
+  logger.debug(`EVENT:\n ${event}`);
   const doorwayApi = process.env.DOORWAY_API
     ? process.env.DOORWAY_API
     : "https://backend.dev.housingbayarea.mtc.ca.gov";
-  const listings = new ListingsInterface(doorwayApi);
+  const passkey = process.env.PASSKEY ? process.env.PASSKEY : "passkey";
+  const maxListings: number = process.env.MAX_LISTINGS
+    ? Number(process.env.MAX_LISTINGS)
+    : 10000;
+  const listings = new ListingsInterface(doorwayApi, passkey, maxListings);
 
   const listingsQuery = event.queryStringParameters!.listingsQuery
     ? event.queryStringParameters!.listingsQuery

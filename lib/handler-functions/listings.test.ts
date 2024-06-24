@@ -1,7 +1,6 @@
 import { ListingsInterface } from "./listings";
 import { MatchingError } from "./matching-error";
 import { server } from "./mockListings";
-import { Listing } from "../../api/Api";
 beforeAll(() => server.listen());
 
 describe("Get All Listings", () => {
@@ -9,13 +8,10 @@ describe("Get All Listings", () => {
     const url = "http://doorway";
     const passkey = "testkey";
     let li = new ListingsInterface(url, passkey);
-    // const listing = li.listingMatcher("Valley Heights");
-    // console.log(listing.name);
+    const listing = li.listingMatcher("Valley Heights");
+    console.log((await listing).amenities);
     const listings = await li.getAllListings();
     expect(listings.length).toBeGreaterThan(0);
-
-    for (var listing in listings) {
-    }
   });
 });
 describe("Listings Matcher", () => {
