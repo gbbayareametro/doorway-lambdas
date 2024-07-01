@@ -3504,7 +3504,7 @@ hasown@^2.0.0:
   dependencies:
     function-bind "^1.1.2"
 
-headers-polyfill@^4.0.2:
+headers-polyfill@^4.0.2, headers-polyfill@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/headers-polyfill/-/headers-polyfill-4.0.3.tgz#922a0155de30ecc1f785bcf04be77844ca95ad07"
   integrity sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ==
