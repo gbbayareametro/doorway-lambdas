@@ -22,8 +22,7 @@ export class ListingsInterface {
   }
   async getAllListings(): Promise<Listing[]> {
     const api = new Api({
-      baseURL: this.url,
-      headers: { passkey: this.passkey },
+      baseUrl: this.url,
     });
     this.logger.debug("Calling listings API");
     const response = await api.listings.list({
@@ -58,13 +57,13 @@ export class ListingsInterface {
   ): Promise<Listing> {
     this.logger.debug("Getting all the listings.");
     const listings = await this.getAllListings();
-    this.logger.info("HERE!!!!!!!!");
     await this.logger.debug(`${listings.length} total listings found`);
 
     const fuse = new Fuse(listings, {
       keys: ["name", "listingsBuildingAddress.street"],
       isCaseSensitive: false,
       includeScore: true,
+      threshold: threshold,
     });
     let result = await fuse.search(match);
 
@@ -76,5 +75,13 @@ export class ListingsInterface {
       });
     }
     return result[0].item;
+  }
+  async getListing(id: string): Promise<Listing> {
+    const api = new Api({
+      baseUrl: this.url,
+    });
+    this.logger.info(`Getting Listing ${id}`);
+    const listing = await api.listings.retrieve(id);
+    return listing.data;
   }
 }

@@ -1,0 +1,296 @@
+[
+  {
+    "id": "78bb1b07-9831-4ea0-a599-a65e93cc6a91",
+    "createdAt": "2023-08-21T23:42:53.785Z",
+    "updatedAt": "2023-12-04T19:36:33.274Z",
+    "text": "Live or work in City of Palo Alto ",
+    "subText": null,
+    "description": "Potential residents who live or work in the City of Palo Alto or have been notified that they have been hired to work at a work site in the City of Palo Alto has a preference for available units. To qualify, one must live at a specific address (a post office box is not considered), or at least one adult household member must work a minimum of twenty hours per week, within the City of Palo Alto.",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "5d6957b4-7e02-44b4-9a2f-a598ed782f39",
+        "name": "Santa Clara"
+      }
+    ],
+    "options": [
+      {
+        "text": "Live in Palo Alto",
+        "ordinal": 1,
+        "description": "At least one member of my household lives in the City of Palo Alto",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      },
+      {
+        "text": "Work in Palo Alto",
+        "ordinal": 2,
+        "description": "At least one member of my household works in the City of Palo Alto",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      }
+    ],
+    "optOutText": "I don't want this preference",
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "c770a3da-115c-488b-a104-7bc72265b39b",
+    "createdAt": "2023-08-21T23:28:30.325Z",
+    "updatedAt": "2023-12-04T19:37:05.881Z",
+    "text": "Live or Work in the City of Mountain View ",
+    "subText": null,
+    "description": "Preference is given to eligible applicants for an affordable unit if they live or work in the City of Mountain View, to the extent permitted by State or Federal law or other fair housing laws.",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "5d6957b4-7e02-44b4-9a2f-a598ed782f39",
+        "name": "Santa Clara"
+      }
+    ],
+    "options": [
+      {
+        "text": "Live in Mountain View",
+        "ordinal": 1,
+        "description": "At least one member of my household lives in the City of Mountain View",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      },
+      {
+        "text": "Work in Mountain View",
+        "ordinal": 2,
+        "description": "At least one member of my household works in the City of Mountain View",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      }
+    ],
+    "optOutText": null,
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "0f7b22bf-8010-4455-97e8-43881dc35854",
+    "createdAt": "2024-04-02T18:52:08.063Z",
+    "updatedAt": "2024-04-02T18:52:08.063Z",
+    "text": "Live and Work in Marin County",
+    "subText": null,
+    "description": "Do you live or work in Marin County?",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "ca240d33-b8ec-493d-a73c-e814ffefe629",
+        "name": "Marin"
+      }
+    ],
+    "options": [
+      {
+        "text": "Yes",
+        "ordinal": 1,
+        "description": "",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": true
+      },
+      {
+        "text": "No",
+        "ordinal": 2,
+        "description": "",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": true
+      }
+    ],
+    "optOutText": "I don't want this preference",
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "c72c9792-8881-4370-ac36-5335c0c7aa6b",
+    "createdAt": "2023-08-27T01:55:03.012Z",
+    "updatedAt": "2024-04-29T20:33:28.977Z",
+    "text": "Live and Work in the City of Santa Clara",
+    "subText": null,
+    "description": "At least one household member currently lives within the City Limits of the City of Santa Clara and for at least the past 6 months at the time of application and currently operates a business or is currently employed by a business or a public or quasi-public agency in the City of Santa Clara for at least the past 6 months at the time of application. ",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "5d6957b4-7e02-44b4-9a2f-a598ed782f39",
+        "name": "Santa Clara"
+      }
+    ],
+    "options": [
+      {
+        "text": "Live and Work in the City of Santa Clara",
+        "ordinal": 1,
+        "description": "At least one household member currently lives within the City Limits of the City of Santa Clara and for at least the past 6 months at the time of application and currently operates a business or is currently employed by a business or a public or quasi-public agency in the City of Santa Clara for at least the past 6 months at the time of application. \n\nPlease include address of business or place of employment:",
+        "links": [],
+        "collectAddress": true,
+        "exclusive": true
+      }
+    ],
+    "optOutText": "I don't want this preference",
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "973300f5-02b1-4c11-9daa-132908600efc",
+    "createdAt": "2023-09-01T23:10:51.942Z",
+    "updatedAt": "2024-04-29T20:33:39.238Z",
+    "text": "Live in the City of Santa Clara",
+    "subText": null,
+    "description": "At least one household member currently lives within the city limits of the City of Santa Clara and for at least the past 6 months at the time of application.",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "5d6957b4-7e02-44b4-9a2f-a598ed782f39",
+        "name": "Santa Clara"
+      }
+    ],
+    "options": [
+      {
+        "text": "Live in the City of Santa Clara",
+        "ordinal": 1,
+        "description": "At least one household member currently lives within the city limits of the City of Santa Clara and for at least the past 6 months at the time of application.",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      }
+    ],
+    "optOutText": "I don't want this preference",
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "7d54c5a5-28b2-4f26-b8ac-bf5a7a82418f",
+    "createdAt": "2023-10-17T16:20:29.114Z",
+    "updatedAt": "2023-12-04T19:36:48.214Z",
+    "text": "Live or work in City of Rohnert Park",
+    "subText": null,
+    "description": "Applicants who live or work in the City of Rohnert Park have a preference for available units. To qualify, one must live at a specific address in the City of Rohnert Park, or at least one adult household member must work at least 50% of weekly hours in the City of Rohnert Park. ",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "037b832e-a603-4f2a-ac17-3fbd6bac60ef",
+        "name": "Sonoma"
+      }
+    ],
+    "options": [
+      {
+        "text": "Live in Rohnert Park",
+        "ordinal": 1,
+        "description": "At least one member of my household lives in the City of Rohnert Park",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      },
+      {
+        "text": "Work in Rohnert Park",
+        "ordinal": 2,
+        "description": "At least one member of my household works in the City of Rohnert Park",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": false
+      }
+    ],
+    "optOutText": null,
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "810398ab-72b5-4295-8119-6fc754363806",
+    "createdAt": "2023-09-01T23:11:51.952Z",
+    "updatedAt": "2024-04-29T20:33:47.601Z",
+    "text": "Work in the City of Santa Clara",
+    "subText": null,
+    "description": "At least one household member currently operates a business or is currently employed by a business or a public or quasi-public agency in the City of Santa Clara and for at least the past 6 months at the time of application. ",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "5d6957b4-7e02-44b4-9a2f-a598ed782f39",
+        "name": "Santa Clara"
+      }
+    ],
+    "options": [
+      {
+        "text": "Work in the City of Santa Clara",
+        "ordinal": 1,
+        "description": "At least one household member currently operates a business or is currently employed by a business or a public or quasi-public agency in the City of Santa Clara and for at least the past 6 months at the time of application. Please include address of business or place of employment:",
+        "links": [],
+        "collectAddress": true,
+        "exclusive": false
+      }
+    ],
+    "optOutText": "I don't want this preference",
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  },
+  {
+    "id": "3db7611b-3815-4680-a6d5-6942cf6a824b",
+    "createdAt": "2024-06-04T01:25:28.665Z",
+    "updatedAt": "2024-06-04T01:25:28.665Z",
+    "text": "Section 8 Project-Based Voucher Program",
+    "subText": "",
+    "description": "The Contra Costa Housing Authority operates a Project Based Voucher (PBV) Program, which is a component of the Housing Choice Voucher Program. The PBV Program allows applicants to receive rental assistance while living in a specified privately-owned property. Through the PBV Program, the rental assistance is attached to a specified unit for up to forty years",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+        "name": "Contra Costa"
+      }
+    ],
+    "options": [
+      {
+        "text": "Yes",
+        "ordinal": 1,
+        "exclusive": true
+      },
+      {
+        "text": "No",
+        "ordinal": 2,
+        "exclusive": true
+      }
+    ],
+    "optOutText": "Prefer not to say",
+    "hideFromListing": false,
+    "applicationSection": "programs"
+  },
+  {
+    "id": "73e6043c-fcea-4864-90db-8f3885ffda15",
+    "createdAt": "2024-02-07T19:40:46.005Z",
+    "updatedAt": "2024-07-11T16:00:44.124Z",
+    "text": "Housing Opportunity for Persons with AIDS (households where a person has been medically diagnosed with HIV/AIDS)",
+    "subText": null,
+    "description": "There is one apartment that is set-aside for a household eligible for the HOPWA program (Housing Opportunity for Persons with AIDS), which is a household where a person has been medically diagnosed with HIV/AIDS.\n",
+    "links": [],
+    "jurisdictions": [
+      {
+        "id": "3addce7f-477d-4394-b340-78ad6e86c958",
+        "name": "Contra Costa"
+      }
+    ],
+    "options": [
+      {
+        "text": "I would like to be considered for the HOPWA unit and will provide documents required to verify eligibility",
+        "ordinal": 1,
+        "description": "You will be required to verify your eligibility for this preference if selected for an interview.",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": true
+      },
+      {
+        "text": "I don’t want to be considered and/or I am not eligible",
+        "ordinal": 2,
+        "description": "",
+        "links": [],
+        "collectAddress": false,
+        "exclusive": true
+      }
+    ],
+    "optOutText": null,
+    "hideFromListing": false,
+    "applicationSection": "preferences"
+  }
+]

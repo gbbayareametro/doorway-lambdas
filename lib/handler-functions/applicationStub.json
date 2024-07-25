@@ -1,0 +1,109 @@
+{
+  "status": "draft",
+  "submissionType": "paper",
+  "contactPreferences": [],
+  " householdSize": 0,
+  "listings": {
+    "id": ""
+  },
+  "applicant": {
+    "firstName": "",
+    "middleName": "",
+    "lastName": "",
+    "birthMonth": "",
+    "birthDay": "",
+    "birthYear": "",
+    "emailAddress": "",
+    "noEmail": false,
+    "phoneNumber": "",
+    "phoneNumberType": "",
+    "noPhone": false,
+    "applicantAddress": {
+      "street": "",
+      "street2": "",
+      "city": "",
+      "state": "",
+      "zipCode": ""
+    },
+    "applicantWorkAddress": {
+      "street": "",
+      "street2": "",
+      "city": "",
+      "state": "",
+      "zipCode": ""
+    },
+    "workInRegion": ""
+  },
+  "applicationsMailingAddress": {
+    "street": "",
+    "street2": "",
+    "city": "",
+    "state": "",
+    "zipCode": ""
+  },
+  "applicationsAlternateAddress": {
+    "street": "",
+    "street2": "",
+    "city": "",
+    "state": "",
+    "zipCode": ""
+  },
+  "alternateContact": {
+    "type": "",
+    "otherType": "",
+    "firstName": "",
+    "lastName": "",
+    "address": {
+      "street": "",
+      "street2": "",
+      "city": "",
+      "state": "",
+      "zipCode": ""
+    },
+    "agency": "",
+    "phoneNumber": "",
+    "emailAddress": ""
+  },
+  "demographics": {
+    "race": [],
+    "howDidYouHear": [],
+    "ethnicity": "",
+    "gender": "",
+    "sexualOrientation": "",
+    "spokenLanguage": ""
+  },
+  "accessibility": {
+    "mobility": false,
+    "vision": false,
+    "hearing": false
+  },
+  "preferredUnitTypes": [],
+  "householdMember": [
+    {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "birthMonth": "",
+      "birthDay": "",
+      "birthYear": "",
+      "sameAddress": "",
+      "relationship": "",
+      "workInRegion": "",
+      "householdMemberAddress": {
+        "street": "",
+        "street2": "",
+        "city": "",
+        "state": "",
+        "zipCode": ""
+      },
+      "householdMemberWorkAddress": {
+        "street": "",
+        "street2": "",
+        "city": "",
+        "state": "",
+        "zipCode": ""
+      }
+    }
+  ],
+  "preferences": []
+}

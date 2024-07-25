@@ -1,0 +1,582 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "submissionType": {
+      "type": "string"
+    },
+    "submissionDate": {
+      "type": "string"
+    },
+    "income": {
+      "type": "string"
+    },
+    "contactByEmail": {
+      "type": "string"
+    },
+    "contactByPhone": {
+      "type": "string"
+    },
+    "contactByLetter": {
+      "type": "string"
+    },
+    "householdSize": {
+      "type": "string"
+    },
+    "listings": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"]
+    },
+    "applicant": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "primaryPhoneIsMobile": {
+          "type": "string"
+        },
+        "primaryPhoneIsHome": {
+          "type": "string"
+        },
+        "primaryPhoneIsWork": {
+          "type": "string"
+        },
+        "applicantAddress": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string"
+            },
+            "street2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            }
+          },
+          "required": ["street", "street2", "city", "state", "zipCode"]
+        },
+        "workInRegion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "middleName",
+        "lastName",
+        "dateOfBirth",
+        "emailAddress",
+        "phoneNumber",
+        "primaryPhoneIsMobile",
+        "primaryPhoneIsHome",
+        "primaryPhoneIsWork",
+        "applicantAddress",
+        "workInRegion"
+      ]
+    },
+    "applicationsMailingAddress": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        }
+      },
+      "required": ["street", "street2", "city", "state", "zipCode"]
+    },
+    "alternateContact": {
+      "type": "object",
+      "properties": {
+        "altContactFamily": {
+          "type": "string"
+        },
+        "altContactIsFriend": {
+          "type": "string"
+        },
+        "altContactIsSW": {
+          "type": "string"
+        },
+        "altContactIsOther": {
+          "type": "string"
+        },
+        "otherType": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string"
+            },
+            "street2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            }
+          },
+          "required": ["street", "street2", "city", "state", "zipCode"]
+        },
+        "agency": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "altContactFamily",
+        "altContactIsFriend",
+        "altContactIsSW",
+        "altContactIsOther",
+        "otherType",
+        "firstName",
+        "lastName",
+        "address",
+        "agency",
+        "phoneNumber",
+        "emailAddress"
+      ]
+    },
+    "demographics": {
+      "type": "object",
+      "properties": {
+        "race": {
+          "type": "object",
+          "properties": {
+            "Asian": {
+              "type": "string"
+            },
+            "Latino": {
+              "type": "string"
+            },
+            "White": {
+              "type": "string"
+            },
+            "Black": {
+              "type": "string"
+            },
+            "Indigenous": {
+              "type": "string"
+            },
+            "MiddleEastern": {
+              "type": "string"
+            },
+            "PacIsland": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Asian",
+            "Latino",
+            "White",
+            "Black",
+            "Indigenous",
+            "MiddleEastern",
+            "PacIsland"
+          ]
+        },
+        "ethnicity": {
+          "type": "object",
+          "properties": {
+            "AfricanAmerican": {
+              "type": "string"
+            },
+            "Chinese": {
+              "type": "string"
+            },
+            "Filipino": {
+              "type": "string"
+            },
+            "Japanese": {
+              "type": "string"
+            },
+            "Korean": {
+              "type": "string"
+            },
+            "Mongolian": {
+              "type": "string"
+            },
+            "Vietnamese": {
+              "type": "string"
+            },
+            "CenAsian": {
+              "type": "string"
+            },
+            "SouthAsian": {
+              "type": "string"
+            },
+            "SEAsian": {
+              "type": "string"
+            },
+            "OtherAsian": {
+              "type": "string"
+            },
+            "African": {
+              "type": "string"
+            },
+            "BlackCaribbean": {
+              "type": "string"
+            },
+            "OtherBlack": {
+              "type": "string"
+            },
+            "LatinoCaribbean": {
+              "type": "string"
+            },
+            "CenAmer": {
+              "type": "string"
+            },
+            "Mexican": {
+              "type": "string"
+            },
+            "SouthAmer": {
+              "type": "string"
+            },
+            "OtherLatino": {
+              "type": "string"
+            },
+            "European": {
+              "type": "string"
+            },
+            "OtherWhite": {
+              "type": "string"
+            },
+            "Alaskan": {
+              "type": "string"
+            },
+            "AmerInd": {
+              "type": "string"
+            },
+            "MexicanInd": {
+              "type": "string"
+            },
+            "OtherInd": {
+              "type": "string"
+            },
+            "NorthAfrican": {
+              "type": "string"
+            },
+            "WestAfrican": {
+              "type": "string"
+            },
+            "OtherME": {
+              "type": "string"
+            },
+            "Chamorro": {
+              "type": "string"
+            },
+            "NativeHawaiian": {
+              "type": "string"
+            },
+            "Samoan": {
+              "type": "string"
+            },
+            "OtherPI": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "AfricanAmerican",
+            "Chinese",
+            "Filipino",
+            "Japanese",
+            "Korean",
+            "Mongolian",
+            "Vietnamese",
+            "CenAsian",
+            "SouthAsian",
+            "SEAsian",
+            "OtherAsian",
+            "African",
+            "BlackCaribbean",
+            "OtherBlack",
+            "LatinoCaribbean",
+            "CenAmer",
+            "Mexican",
+            "SouthAmer",
+            "OtherLatino",
+            "European",
+            "OtherWhite",
+            "Alaskan",
+            "AmerInd",
+            "MexicanInd",
+            "OtherInd",
+            "NorthAfrican",
+            "WestAfrican",
+            "OtherME",
+            "Chamorro",
+            "NativeHawaiian",
+            "Samoan",
+            "OtherPI"
+          ]
+        },
+        "gender": {
+          "type": "object",
+          "properties": {
+            "Male": {
+              "type": "string"
+            },
+            "Female": {
+              "type": "string"
+            },
+            "TransMan": {
+              "type": "string"
+            },
+            "TransWoman": {
+              "type": "string"
+            },
+            "GenderQueer": {
+              "type": "string"
+            },
+            "GenderOther": {
+              "type": "string"
+            },
+            "GenderUnsure": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Male",
+            "Female",
+            "TransMan",
+            "TransWoman",
+            "GenderQueer",
+            "GenderOther",
+            "GenderUnsure"
+          ]
+        },
+        "sexualOrientation": {
+          "type": "object",
+          "properties": {
+            "Straight": {
+              "type": "string"
+            },
+            "Asexual": {
+              "type": "string"
+            },
+            "Bisexual": {
+              "type": "string"
+            },
+            "GayLesbian": {
+              "type": "string"
+            },
+            "Questioning": {
+              "type": "string"
+            },
+            "Other": {
+              "type": "string"
+            },
+            "DontUnderstand": {
+              "type": "string"
+            },
+            "DidNotRespond": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Straight",
+            "Asexual",
+            "Bisexual",
+            "GayLesbian",
+            "Questioning",
+            "Other",
+            "DontUnderstand",
+            "DidNotRespond"
+          ]
+        },
+        "spokenLanguage": {
+          "type": "object",
+          "properties": {
+            "Cantonese": {
+              "type": "string"
+            },
+            "Mandarin": {
+              "type": "string"
+            },
+            "English": {
+              "type": "string"
+            },
+            "Filipino": {
+              "type": "string"
+            },
+            "Korean": {
+              "type": "string"
+            },
+            "Russian": {
+              "type": "string"
+            },
+            "Spanish": {
+              "type": "string"
+            },
+            "Vietnamese": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Cantonese",
+            "Mandarin",
+            "English",
+            "Filipino",
+            "Korean",
+            "Russian",
+            "Spanish",
+            "Vietnamese"
+          ]
+        }
+      },
+      "required": [
+        "race",
+        "ethnicity",
+        "gender",
+        "sexualOrientation",
+        "spokenLanguage"
+      ]
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "mobility": {
+          "type": "string"
+        },
+        "vision": {
+          "type": "string"
+        },
+        "hearing": {
+          "type": "string"
+        }
+      },
+      "required": ["mobility", "vision", "hearing"]
+    },
+    "preferredUnitTypes": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "Studio": {
+              "type": "string"
+            },
+            "1BR": {
+              "type": "string"
+            },
+            "2BR": {
+              "type": "string"
+            },
+            "3BR": {
+              "type": "string"
+            },
+            "4BR": {
+              "type": "string"
+            }
+          },
+          "required": ["Studio", "1BR", "2BR", "3BR", "4BR"]
+        }
+      ]
+    },
+    "householdMember": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string"
+          },
+          "relationship": {
+            "type": "string"
+          },
+          "sameAddress": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "preferences": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "status",
+    "submissionType",
+    "contactByEmail",
+    "contactByPhone",
+    "contactByLetter",
+    "householdSize",
+    "listings",
+    "applicant",
+    "applicationsMailingAddress",
+    "alternateContact",
+    "demographics",
+    "accessibility",
+    "preferredUnitTypes",
+    "householdMember",
+    "preferences"
+  ]
+}

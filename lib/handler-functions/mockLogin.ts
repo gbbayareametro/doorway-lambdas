@@ -1,4 +1,4 @@
-import { HttpResponse, http } from "msw";
+import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import mockSuccessfulLogin from "./mockSuccessfulLogin.json";
 import mockFailedLogin from "./mockFailedLogin.json";
@@ -8,11 +8,13 @@ export const handlers = [
     const requestjson = (await request.json())!;
     const userid = requestjson["email"];
     const password = requestjson["password"];
+
     if (userid == "good.user@gooduser.com" && password == "goodpassword") {
       let res = HttpResponse.json(mockSuccessfulLogin, {
         status: 200,
         headers: {
           "Set-Cookie": "access-token=thisismyaccesstoken",
+          "Set-Cookie2": "refresh-token=thisismyrefreshtoken",
         },
       });
       return res;

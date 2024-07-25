@@ -1,0 +1,51 @@
+[
+  {
+    "id": "09e8b6f1-aa85-4692-af47-7e0149e0a417",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "SRO",
+    "numBedrooms": 0
+  },
+  {
+    "id": "d0c860d8-183a-4ad7-86b4-5cc4bd3b74da",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "studio",
+    "numBedrooms": 0
+  },
+  {
+    "id": "66dcb781-7565-4c4b-9170-6a66b2f299f3",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "oneBdrm",
+    "numBedrooms": 1
+  },
+  {
+    "id": "fadad4ab-63b1-4aca-8a61-0185b11972d7",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "twoBdrm",
+    "numBedrooms": 2
+  },
+  {
+    "id": "89e9fcc7-153d-493d-ad20-19f0d11d449e",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "threeBdrm",
+    "numBedrooms": 3
+  },
+  {
+    "id": "add7c031-0d7c-45d1-bc9b-5a12910bf186",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "fourBdrm",
+    "numBedrooms": 4
+  },
+  {
+    "id": "6351339c-0fdb-4644-abcc-0a4b0179bc94",
+    "createdAt": "2023-06-14T01:54:45.775Z",
+    "updatedAt": "2023-06-14T01:54:45.775Z",
+    "name": "fiveBdrm",
+    "numBedrooms": 5
+  }
+]

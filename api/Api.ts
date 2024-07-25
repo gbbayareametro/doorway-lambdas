@@ -138,6 +138,15 @@ export enum ReviewOrderTypeEnum {
   Waitlist = "waitlist",
 }
 
+export enum LotteryStatusEnum {
+  Errored = "errored",
+  Ran = "ran",
+  Approved = "approved",
+  ReleasedToPartners = "releasedToPartners",
+  PublishedToPublic = "publishedToPublic",
+  Expired = "expired",
+}
+
 export interface MultiselectLink {
   title: string;
   url: string;
@@ -558,6 +567,9 @@ export interface Listing {
   /** @format date-time */
   afsLastRunAt?: string;
   /** @format date-time */
+  lotteryLastRunAt?: string;
+  lotteryStatus?: LotteryStatusEnum;
+  /** @format date-time */
   lastApplicationUpdateAt?: string;
   listingMultiselectQuestions?: ListingMultiselectQuestion[];
   applicationMethods: ApplicationMethod[];
@@ -762,6 +774,9 @@ export interface ListingCreate {
   /** @format date-time */
   contentUpdatedAt?: string;
   /** @format date-time */
+  lotteryLastRunAt?: string;
+  lotteryStatus?: LotteryStatusEnum;
+  /** @format date-time */
   lastApplicationUpdateAt?: string;
   jurisdictions: IdDTO;
   reservedCommunityTypes?: IdDTO;
@@ -786,6 +801,11 @@ export interface ListingCreate {
   listingFeatures?: ListingFeatures;
   listingUtilities?: ListingUtilities;
   requestedChangesUser?: IdDTO;
+}
+
+export interface ListingLotteryStatus {
+  listingId: string;
+  lotteryStatus: LotteryStatusEnum;
 }
 
 export interface ListingUpdate {
@@ -854,6 +874,9 @@ export interface ListingUpdate {
   customMapPin?: boolean;
   /** @format date-time */
   contentUpdatedAt?: string;
+  /** @format date-time */
+  lotteryLastRunAt?: string;
+  lotteryStatus?: LotteryStatusEnum;
   /** @format date-time */
   lastApplicationUpdateAt?: string;
   jurisdictions: IdDTO;
@@ -1229,12 +1252,7 @@ export interface JurisdictionCreate {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: (
-    | "user"
-    | "partner"
-    | "admin"
-    | "jurisdictionAdmin"
-  )[];
+  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
 }
 
 export interface JurisdictionUpdate {
@@ -1255,12 +1273,7 @@ export interface JurisdictionUpdate {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: (
-    | "user"
-    | "partner"
-    | "admin"
-    | "jurisdictionAdmin"
-  )[];
+  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
 }
 
 export interface Jurisdiction {
@@ -1286,12 +1299,7 @@ export interface Jurisdiction {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: (
-    | "user"
-    | "partner"
-    | "admin"
-    | "jurisdictionAdmin"
-  )[];
+  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
 }
 
 export interface MultiselectQuestionCreate {
@@ -1515,6 +1523,7 @@ export interface EmailAndAppUrl {
 export interface UserRole {
   isAdmin?: boolean;
   isJurisdictionalAdmin?: boolean;
+  isLimitedJurisdictionalAdmin?: boolean;
   isPartner?: boolean;
 }
 
@@ -1635,6 +1644,7 @@ export interface Login {
   password: string;
   mfaCode?: string;
   mfaType?: MfaType;
+  reCaptchaToken?: string;
 }
 
 export interface LoginViaSingleUseCode {
@@ -1676,19 +1686,16 @@ export interface DataTransferDTO {
   connectionString: string;
 }
 
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  HeadersDefaults,
-  ResponseType,
-} from "axios";
-import axios from "axios";
+export interface AmiChartImportDTO {
+  values: string;
+  name: string;
+  jurisdictionId: string;
+}
 
 export type QueryParamsType = Record<string | number, any>;
+export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
-export interface FullRequestParams
-  extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
+export interface FullRequestParams extends Omit<RequestInit, "body"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -1698,24 +1705,30 @@ export interface FullRequestParams
   /** query params */
   query?: QueryParamsType;
   /** format of response (i.e. response.json() -> format: "json") */
-  format?: ResponseType;
+  format?: ResponseFormat;
   /** request body */
   body?: unknown;
+  /** base url */
+  baseUrl?: string;
+  /** request cancellation token */
+  cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<
-  FullRequestParams,
-  "body" | "method" | "query" | "path"
->;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
-export interface ApiConfig<SecurityDataType = unknown>
-  extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
-  securityWorker?: (
-    securityData: SecurityDataType | null
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
-  secure?: boolean;
-  format?: ResponseType;
+export interface ApiConfig<SecurityDataType = unknown> {
+  baseUrl?: string;
+  baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
+  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  customFetch?: typeof fetch;
 }
+
+export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+  data: D;
+  error: E;
+}
+
+type CancelToken = Symbol | string | number;
 
 export enum ContentType {
   Json = "application/json",
@@ -1725,126 +1738,166 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public instance: AxiosInstance;
+  public baseUrl: string = "";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
-  private secure?: boolean;
-  private format?: ResponseType;
+  private abortControllers = new Map<CancelToken, AbortController>();
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
 
-  constructor({
-    securityWorker,
-    secure,
-    format,
-    ...axiosConfig
-  }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({
-      ...axiosConfig,
-      baseURL: axiosConfig.baseURL || "",
-    });
-    this.secure = secure;
-    this.format = format;
-    this.securityWorker = securityWorker;
+  private baseApiParams: RequestParams = {
+    credentials: "same-origin",
+    headers: {},
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  };
+
+  constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
+    Object.assign(this, apiConfig);
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {
     this.securityData = data;
   };
 
-  protected mergeRequestParams(
-    params1: AxiosRequestConfig,
-    params2?: AxiosRequestConfig
-  ): AxiosRequestConfig {
-    const method = params1.method || (params2 && params2.method);
+  protected encodeQueryParam(key: string, value: any) {
+    const encodedKey = encodeURIComponent(key);
+    return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
+  }
 
+  protected addQueryParam(query: QueryParamsType, key: string) {
+    return this.encodeQueryParam(key, query[key]);
+  }
+
+  protected addArrayQueryParam(query: QueryParamsType, key: string) {
+    const value = query[key];
+    return value.map((v: any) => this.encodeQueryParam(key, v)).join("&");
+  }
+
+  protected toQueryString(rawQuery?: QueryParamsType): string {
+    const query = rawQuery || {};
+    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    return keys
+      .map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
+      .join("&");
+  }
+
+  protected addQueryParams(rawQuery?: QueryParamsType): string {
+    const queryString = this.toQueryString(rawQuery);
+    return queryString ? `?${queryString}` : "";
+  }
+
+  private contentFormatters: Record<ContentType, (input: any) => any> = {
+    [ContentType.Json]: (input: any) =>
+      input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
+    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
+    [ContentType.FormData]: (input: any) =>
+      Object.keys(input || {}).reduce((formData, key) => {
+        const property = input[key];
+        formData.append(
+          key,
+          property instanceof Blob
+            ? property
+            : typeof property === "object" && property !== null
+              ? JSON.stringify(property)
+              : `${property}`,
+        );
+        return formData;
+      }, new FormData()),
+    [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
+  };
+
+  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
     return {
-      ...this.instance.defaults,
+      ...this.baseApiParams,
       ...params1,
       ...(params2 || {}),
       headers: {
-        ...((method &&
-          this.instance.defaults.headers[
-            method.toLowerCase() as keyof HeadersDefaults
-          ]) ||
-          {}),
+        ...(this.baseApiParams.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
       },
     };
   }
 
-  protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === "object" && formItem !== null) {
-      return JSON.stringify(formItem);
-    } else {
-      return `${formItem}`;
-    }
-  }
-
-  protected createFormData(input: Record<string, unknown>): FormData {
-    return Object.keys(input || {}).reduce((formData, key) => {
-      const property = input[key];
-      const propertyContent: any[] =
-        property instanceof Array ? property : [property];
-
-      for (const formItem of propertyContent) {
-        const isFileType = formItem instanceof Blob || formItem instanceof File;
-        formData.append(
-          key,
-          isFileType ? formItem : this.stringifyFormItem(formItem)
-        );
+  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+    if (this.abortControllers.has(cancelToken)) {
+      const abortController = this.abortControllers.get(cancelToken);
+      if (abortController) {
+        return abortController.signal;
       }
+      return void 0;
+    }
 
-      return formData;
-    }, new FormData());
-  }
+    const abortController = new AbortController();
+    this.abortControllers.set(cancelToken, abortController);
+    return abortController.signal;
+  };
 
-  public request = async <T = any, _E = any>({
+  public abortRequest = (cancelToken: CancelToken) => {
+    const abortController = this.abortControllers.get(cancelToken);
+
+    if (abortController) {
+      abortController.abort();
+      this.abortControllers.delete(cancelToken);
+    }
+  };
+
+  public request = async <T = any, E = any>({
+    body,
     secure,
     path,
     type,
     query,
     format,
-    body,
+    baseUrl,
+    cancelToken,
     ...params
-  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+  }: FullRequestParams): Promise<HttpResponse<T, E>> => {
     const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
+      ((typeof secure === "boolean" ? secure : this.baseApiParams.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
     const requestParams = this.mergeRequestParams(params, secureParams);
-    const responseFormat = format || this.format || undefined;
+    const queryString = query && this.toQueryString(query);
+    const payloadFormatter = this.contentFormatters[type || ContentType.Json];
+    const responseFormat = format || requestParams.format;
 
-    if (
-      type === ContentType.FormData &&
-      body &&
-      body !== null &&
-      typeof body === "object"
-    ) {
-      body = this.createFormData(body as Record<string, unknown>);
-    }
-
-    if (
-      type === ContentType.Text &&
-      body &&
-      body !== null &&
-      typeof body !== "string"
-    ) {
-      body = JSON.stringify(body);
-    }
-
-    return this.instance.request({
+    return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData
-          ? { "Content-Type": type }
-          : {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
-      params: query,
-      responseType: responseFormat,
-      data: body,
-      url: path,
+      signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
+      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
+    }).then(async (response) => {
+      const r = response.clone() as HttpResponse<T, E>;
+      r.data = null as unknown as T;
+      r.error = null as unknown as E;
+
+      const data = !responseFormat
+        ? r
+        : await response[responseFormat]()
+            .then((data) => {
+              if (r.ok) {
+                r.data = data;
+              } else {
+                r.error = data;
+              }
+              return r;
+            })
+            .catch((e) => {
+              r.error = e;
+              return r;
+            });
+
+      if (cancelToken) {
+        this.abortControllers.delete(cancelToken);
+      }
+
+      if (!response.ok) throw data;
+      return data;
     });
   };
 }
@@ -1856,9 +1909,7 @@ export class HttpClient<SecurityDataType = unknown> {
  *
  * The API for Bloom
  */
-export class Api<
-  SecurityDataType extends unknown
-> extends HttpClient<SecurityDataType> {
+export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -1941,7 +1992,7 @@ export class Api<
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaginatedListingDto, any>({
         path: `/listings`,
@@ -2017,7 +2068,7 @@ export class Api<
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<void, any>({
         path: `/listings/combined`,
@@ -2039,7 +2090,7 @@ export class Api<
         /** @example "America/Los_Angeles" */
         timeZone?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<void, any>({
         path: `/listings/csv`,
@@ -2062,7 +2113,7 @@ export class Api<
         /** @example "full" */
         view?: ListingViews;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<string, any>({
         path: `/listings/external/${id}`,
@@ -2086,7 +2137,7 @@ export class Api<
         /** @example "full" */
         view?: ListingViews;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Listing, any>({
         path: `/listings/${id}`,
@@ -2105,11 +2156,12 @@ export class Api<
      * @request PUT:/listings/{id}
      */
     update: (id: string, data: ListingUpdate, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<Listing, any>({
         path: `/listings/${id}`,
         method: "PUT",
         body: data,
         type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -2133,14 +2185,29 @@ export class Api<
      * No description
      *
      * @tags listings
+     * @name LotteryStatus
+     * @summary Change the listing lottery status
+     * @request PUT:/listings/lotteryStatus
+     */
+    lotteryStatus: (data: ListingLotteryStatus, params: RequestParams = {}) =>
+      this.request<SuccessDTO, any>({
+        path: `/listings/lotteryStatus`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags listings
      * @name RetrieveListings
      * @summary Get listings by multiselect question id
      * @request GET:/listings/byMultiselectQuestion/{multiselectQuestionId}
      */
-    retrieveListings: (
-      multiselectQuestionId: string,
-      params: RequestParams = {}
-    ) =>
+    retrieveListings: (multiselectQuestionId: string, params: RequestParams = {}) =>
       this.request<IdDTO[], any>({
         path: `/listings/byMultiselectQuestion/${multiselectQuestionId}`,
         method: "GET",
@@ -2175,7 +2242,7 @@ export class Api<
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaginatedAfsDto, any>({
         path: `/applicationFlaggedSets`,
@@ -2211,7 +2278,7 @@ export class Api<
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<AfsMeta, any>({
         path: `/applicationFlaggedSets/meta`,
@@ -2245,11 +2312,7 @@ export class Api<
      * @summary Reset flagged set confirmation alert
      * @request PUT:/applicationFlaggedSets/{afsId}
      */
-    resetConfirmationAlert: (
-      afsId: string,
-      data: IdDTO,
-      params: RequestParams = {}
-    ) =>
+    resetConfirmationAlert: (afsId: string, data: IdDTO, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/applicationFlaggedSets/${afsId}`,
         method: "PUT",
@@ -2306,7 +2369,7 @@ export class Api<
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<AmiChart[], any>({
         path: `/amiCharts`,
@@ -2376,11 +2439,7 @@ export class Api<
      * @summary Update amiChart
      * @request PUT:/amiCharts/{amiChartId}
      */
-    update: (
-      amiChartId: string,
-      data: AmiChartUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (amiChartId: string, data: AmiChartUpdate, params: RequestParams = {}) =>
       this.request<AmiChart, any>({
         path: `/amiCharts/${amiChartId}`,
         method: "PUT",
@@ -2403,7 +2462,7 @@ export class Api<
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<ReservedCommunityType[], any>({
         path: `/reservedCommunityTypes`,
@@ -2473,11 +2532,7 @@ export class Api<
      * @summary Update reservedCommunityType
      * @request PUT:/reservedCommunityTypes/{reservedCommunityTypeId}
      */
-    update: (
-      reservedCommunityTypeId: string,
-      data: ReservedCommunityTypeUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (reservedCommunityTypeId: string, data: ReservedCommunityTypeUpdate, params: RequestParams = {}) =>
       this.request<ReservedCommunityType, any>({
         path: `/reservedCommunityTypes/${reservedCommunityTypeId}`,
         method: "PUT",
@@ -2564,11 +2619,7 @@ export class Api<
      * @summary Update unitType
      * @request PUT:/unitTypes/{unitTypeId}
      */
-    update: (
-      unitTypeId: string,
-      data: UnitTypeUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (unitTypeId: string, data: UnitTypeUpdate, params: RequestParams = {}) =>
       this.request<UnitType, any>({
         path: `/unitTypes/${unitTypeId}`,
         method: "PUT",
@@ -2603,10 +2654,7 @@ export class Api<
      * @summary Create unitAccessibilityPriorityType
      * @request POST:/unitAccessibilityPriorityTypes
      */
-    create: (
-      data: UnitAccessibilityPriorityTypeCreate,
-      params: RequestParams = {}
-    ) =>
+    create: (data: UnitAccessibilityPriorityTypeCreate, params: RequestParams = {}) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes`,
         method: "POST",
@@ -2642,10 +2690,7 @@ export class Api<
      * @summary Get unitAccessibilityPriorityType by id
      * @request GET:/unitAccessibilityPriorityTypes/{unitAccessibilityPriorityTypeId}
      */
-    retrieve: (
-      unitAccessibilityPriorityTypeId: string,
-      params: RequestParams = {}
-    ) =>
+    retrieve: (unitAccessibilityPriorityTypeId: string, params: RequestParams = {}) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes/${unitAccessibilityPriorityTypeId}`,
         method: "GET",
@@ -2664,7 +2709,7 @@ export class Api<
     update: (
       unitAccessibilityPriorityTypeId: string,
       data: UnitAccessibilityPriorityTypeUpdate,
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes/${unitAccessibilityPriorityTypeId}`,
@@ -2752,11 +2797,7 @@ export class Api<
      * @summary Update unitRentType
      * @request PUT:/unitRentTypes/{unitRentTypeId}
      */
-    update: (
-      unitRentTypeId: string,
-      data: UnitRentTypeUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (unitRentTypeId: string, data: UnitRentTypeUpdate, params: RequestParams = {}) =>
       this.request<UnitRentType, any>({
         path: `/unitRentTypes/${unitRentTypeId}`,
         method: "PUT",
@@ -2843,11 +2884,7 @@ export class Api<
      * @summary Update jurisdiction
      * @request PUT:/jurisdictions/{jurisdictionId}
      */
-    update: (
-      jurisdictionId: string,
-      data: JurisdictionUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (jurisdictionId: string, data: JurisdictionUpdate, params: RequestParams = {}) =>
       this.request<Jurisdiction, any>({
         path: `/jurisdictions/${jurisdictionId}`,
         method: "PUT",
@@ -2887,7 +2924,7 @@ export class Api<
         /** @example {"$comparison":"=","applicationSection":"programs"} */
         filter?: MultiselectQuestionFilterParams[];
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<MultiselectQuestion[], any>({
         path: `/multiselectQuestions`,
@@ -2957,11 +2994,7 @@ export class Api<
      * @summary Update multiselect question
      * @request PUT:/multiselectQuestions/{multiselectQuestionId}
      */
-    update: (
-      multiselectQuestionId: string,
-      data: MultiselectQuestionUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (multiselectQuestionId: string, data: MultiselectQuestionUpdate, params: RequestParams = {}) =>
       this.request<MultiselectQuestion, any>({
         path: `/multiselectQuestions/${multiselectQuestionId}`,
         method: "PUT",
@@ -3005,7 +3038,7 @@ export class Api<
         /** @example true */
         markedAsDuplicate?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaginatedApplicationDto, any>({
         path: `/applications`,
@@ -3064,7 +3097,7 @@ export class Api<
         /** @example "userId" */
         userId: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Application, any>({
         path: `/applications/mostRecentlyCreated`,
@@ -3090,7 +3123,7 @@ export class Api<
         /** @example "America/Los_Angeles" */
         timeZone?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<void, any>({
         path: `/applications/csv`,
@@ -3123,12 +3156,7 @@ export class Api<
      * @summary Update application by id
      * @request PUT:/applications/{applicationId}
      */
-    update: (
-      id: string,
-      applicationId: string,
-      data: ApplicationUpdate,
-      params: RequestParams = {}
-    ) =>
+    update: (id: string, applicationId: string, data: ApplicationUpdate, params: RequestParams = {}) =>
       this.request<Application, any>({
         path: `/applications/${applicationId}`,
         method: "PUT",
@@ -3164,10 +3192,7 @@ export class Api<
      * @summary Verify application can be saved
      * @request POST:/applications/verify
      */
-    submissionValidation: (
-      data: ApplicationCreate,
-      params: RequestParams = {}
-    ) =>
+    submissionValidation: (data: ApplicationCreate, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/applications/verify`,
         method: "POST",
@@ -3219,7 +3244,7 @@ export class Api<
          */
         limit?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<void, any>({
         path: `/asset`,
@@ -3255,10 +3280,7 @@ export class Api<
      * @request POST:/asset/presigned-upload-metadata
      * @secure
      */
-    createPresignedUploadMetadata: (
-      data: CreatePresignedUploadMetadata,
-      params: RequestParams = {}
-    ) =>
+    createPresignedUploadMetadata: (data: CreatePresignedUploadMetadata, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/asset/presigned-upload-metadata`,
         method: "POST",
@@ -3334,7 +3356,7 @@ export class Api<
         /** @example true */
         noWelcomeEmail?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<User, any>({
         path: `/user`,
@@ -3371,7 +3393,7 @@ export class Api<
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaginatedUserDto, any>({
         path: `/user/list`,
@@ -3474,10 +3496,7 @@ export class Api<
      * @summary Request single use code
      * @request POST:/user/request-single-use-code
      */
-    requestSingleUseCode: (
-      data: RequestSingleUseCode,
-      params: RequestParams = {}
-    ) =>
+    requestSingleUseCode: (data: RequestSingleUseCode, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/user/request-single-use-code`,
         method: "POST",
@@ -3513,10 +3532,7 @@ export class Api<
      * @summary Resend partner confirmation
      * @request POST:/user/resend-partner-confirmation
      */
-    resendPartnerConfirmation: (
-      data: EmailAndAppUrl,
-      params: RequestParams = {}
-    ) =>
+    resendPartnerConfirmation: (data: EmailAndAppUrl, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/user/resend-partner-confirmation`,
         method: "POST",
@@ -3534,10 +3550,7 @@ export class Api<
      * @summary Verifies token is valid
      * @request POST:/user/is-confirmation-token-valid
      */
-    isUserConfirmationTokenValid: (
-      data: ConfirmationRequest,
-      params: RequestParams = {}
-    ) =>
+    isUserConfirmationTokenValid: (data: ConfirmationRequest, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/user/is-confirmation-token-valid`,
         method: "POST",
@@ -3574,10 +3587,7 @@ export class Api<
      * @summary LoginViaSingleUseCode
      * @request POST:/auth/loginViaSingleUseCode
      */
-    loginViaASingleUseCode: (
-      data: LoginViaSingleUseCode,
-      params: RequestParams = {}
-    ) =>
+    loginViaASingleUseCode: (data: LoginViaSingleUseCode, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/auth/loginViaSingleUseCode`,
         method: "POST",
@@ -3686,7 +3696,7 @@ export class Api<
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<MapLayerDto[], any>({
         path: `/mapLayers`,
@@ -3724,6 +3734,24 @@ export class Api<
     dataTransfer: (data: DataTransferDTO, params: RequestParams = {}) =>
       this.request<SuccessDTO, any>({
         path: `/scriptRunner/dataTransfer`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags scriptRunner
+     * @name AmiChartImport
+     * @summary A script that takes in a standardized string and outputs the input for the ami chart create endpoint
+     * @request PUT:/scriptRunner/amiChartImport
+     */
+    amiChartImport: (data: AmiChartImportDTO, params: RequestParams = {}) =>
+      this.request<SuccessDTO, any>({
+        path: `/scriptRunner/amiChartImport`,
         method: "PUT",
         body: data,
         type: ContentType.Json,
