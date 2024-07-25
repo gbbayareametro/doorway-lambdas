@@ -459,7 +459,7 @@ export class DoorwayPaperApplications {
               const listingPref = resultItem.item;
               let appPref: ApplicationMultiselectQuestion = {
                 multiselectQuestionId: resultItem.item["id"],
-                key: "I would like to be considered for the HOPWA unit and will provide documents required to verify eligibility",
+                key: resultItem.item["name"],
 
                 claimed: true,
                 options: [
