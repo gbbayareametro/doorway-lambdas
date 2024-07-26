@@ -1,9 +1,9 @@
 import { DoorwayPaperApplications } from "./paper-applications";
-import application from "./mockApplication.json";
+import application from "./mockPaperAppMessage.json";
 
 describe("Validation of Input", () => {
   test("successful validation", () => {
-    const apps = new DoorwayApplications(
+    const apps = new DoorwayPaperApplications(
       "myuser",
       "mypassword",
       "myurl",

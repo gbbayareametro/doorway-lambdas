@@ -1,0 +1,186 @@
+{
+  "status": "draft",
+  "submissionType": "paper",
+  "submissionDate": "2024-07-25T17:51:00.4555455Z",
+  "contactByEmail": "False",
+  "contactByPhone": "False",
+  "contactByLetter": "True",
+  "householdSize": "7",
+  "income": "",
+  "listings": {
+    "id": "cbc967c6-34d4-4d28-ae77-76a6bf3189d7"
+  },
+  "applicant": {
+    "firstName": "Gloria",
+    "middleName": "M",
+    "lastName": "Khan",
+    "dateOfBirth": "1990-05-05T00:00:00Z",
+    "emailAddress": "egyptianqueen@hotmail.com",
+    "phoneNumber": "714-489-3870",
+    "primaryPhoneIsMobile": "True",
+    "primaryPhoneIsHome": "False",
+    "primaryPhoneIsWork": "False",
+    "applicantAddress": {
+      "street": "63 Whispering Pine",
+      "street2": "E",
+      "city": "Roseville",
+      "state": "CA",
+      "zipCode": "92650"
+    },
+    "workInRegion": "True"
+  },
+  "applicationsMailingAddress": {
+    "street": "55 Photinia",
+    "street2": "26",
+    "city": "Long Beach",
+    "state": "CA",
+    "zipCode": "95161"
+  },
+  "alternateContact": {
+    "altContactFamily": "False",
+    "altContactIsFriend": "True",
+    "altContactIsSW": "False",
+    "altContactIsOther": "False",
+
+    "otherType": "",
+    "firstName": "Beth",
+    "lastName": "Farnsworth",
+    "address": {
+      "street": "",
+      "street2": "",
+      "city": "",
+      "state": "",
+      "zipCode": ""
+    },
+    "agency": "",
+    "phoneNumber": "",
+    "emailAddress": ""
+  },
+  "demographics": {
+    "race": {
+      "Asian": "True",
+      "Latino": "False",
+      "White": "False",
+      "Black": "False",
+      "Indigenous": "False",
+      "MiddleEastern": "False",
+      "PacIsland": "False"
+    },
+    "ethnicity": {
+      "AfricanAmerican": ":unselected:",
+      "Chinese": "False",
+      "Filipino": "False",
+      "Japanese": "False",
+      "Korean": "False",
+      "Mongolian": "True",
+      "Vietnamese": "False",
+      "CenAsian": "False",
+      "SouthAsian": "False",
+      "SEAsian": "False",
+      "OtherAsian": "False",
+      "African": "False",
+      "BlackCaribbean": "False",
+      "OtherBlack": "",
+      "LatinoCaribbean": "False",
+      "CenAmer": "False",
+      "Mexican": "False",
+      "SouthAmer": "False",
+      "OtherLatino": "False",
+      "European": "False",
+      "OtherWhite": "False",
+      "Alaskan": "False",
+      "AmerInd": "False",
+      "MexicanInd": "False",
+      "OtherInd": "False",
+      "NorthAfrican": "False",
+      "WestAfrican": "False",
+      "OtherME": "False",
+      "Chamorro": "False",
+      "NativeHawaiian": "False",
+      "Samoan": "False",
+      "OtherPI": "False"
+    },
+
+    "gender": {
+      "Male": "False",
+      "Female": "False",
+      "TransMan": "False",
+      "TransWoman": "False",
+      "GenderQueer": "False",
+      "GenderOther": "True",
+      "GenderUnsure": "False"
+    },
+    "sexualOrientation": {
+      "Straight": "True",
+      "Asexual": "False",
+      "Bisexual": "False",
+      "GayLesbian": "False",
+      "Questioning": "False",
+      "Other": "False",
+      "DontUnderstand": "False",
+      "DidNotRespond": "False"
+    },
+    "spokenLanguage": {
+      "Cantonese": "False",
+      "Mandarin": "False",
+      "English": "True",
+      "Filipino": "False",
+      "Korean": "False",
+      "Russian": "False",
+      "Spanish": "False",
+      "Vietnamese": "False"
+    }
+  },
+  "accessibility": {
+    "mobility": "False",
+    "vision": "False",
+    "hearing": "False"
+  },
+  "preferredUnitTypes": [
+    {
+      "Studio": "False",
+      "1BR": "False",
+      "2BR": "False",
+      "3BR": "True",
+      "4BR": "False"
+    }
+  ],
+  "householdMember": [
+    {
+      "firstName": "Kurt",
+      "middleName": "A",
+      "lastName": "Coja",
+      "dateOfBirth": "2024-05-29T00:00:00Z",
+
+      "relationship": "",
+      "sameAddress": "yes"
+    },
+    {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "dateOfBirth": "",
+      "relationship": "",
+      "sameAddress": "yes"
+    },
+
+    {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "dateOfBirth": "",
+
+      "relationship": "",
+      "sameAddress": "yes"
+    },
+    {
+      "firstName": "",
+      "middleName": "A",
+      "lastName": "",
+      "birthMonth": "",
+      "relationship": "",
+      "sameAddress": "yes"
+    }
+  ],
+  "preferences": [{ "name": "HOPWA", "value": "True" }]
+}
