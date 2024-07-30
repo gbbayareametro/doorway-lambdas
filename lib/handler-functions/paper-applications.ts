@@ -1,3 +1,4 @@
+import parsePhoneNumber, { E164Number, PhoneNumber } from "libphonenumber-js";
 import { DoorwayLogin } from "./doorway-login";
 import { instance } from "./winston.logger";
 import Fuse, { FuseResult } from "fuse.js";
@@ -23,6 +24,8 @@ import {
   ListingMultiselectQuestion,
   HouseholdMemberRelationship,
   YesNoEnum,
+  IncomePeriodEnum,
+  LanguagesEnum,
 } from "../../api/Api";
 import { UnitTypeService } from "./unit-types";
 import { ListingsInterface } from "./listings";
@@ -50,14 +53,14 @@ export class DoorwayPaperApplications {
     this.listingsService = new ListingsInterface(url, passkey);
   }
   async submit(
-    application: PaperApplication
+    application: PaperApplication,
   ): Promise<AxiosResponse<any, any>> {
     this.logger.info("Submittng paper Application to Doorway API");
     this.logger.debug(application);
     axios.defaults.withCredentials = true;
     const tokens = await this.doorwayLogin.login();
     this.logger.info(
-      `Submitting application for listing ${application.listings.id}`
+      `Submitting application for listing ${application.listings.id}`,
     );
     const response = axios.post(this.url, application, {
       headers: {
@@ -70,7 +73,7 @@ export class DoorwayPaperApplications {
   }
   isValid(application: object): boolean {
     const appSchema = JSON.parse(
-      fs.readFileSync("./lib/handler-functions/applicationSchema.json", "utf8")
+      fs.readFileSync("./lib/handler-functions/applicationSchema.json", "utf8"),
     );
 
     const validator = new Validator();
@@ -82,12 +85,22 @@ export class DoorwayPaperApplications {
     }
     return result.valid;
   }
-  async transform(inputJson): Promise<ApplicationCreate> {
+  async transform(inputJson): Promise<PaperApplication> {
+    this.logger.debug(inputJson);
     const paperApp = new PaperApplication();
     paperApp.applicationsMailingAddress = inputJson.applicationsMailingAddress;
     paperApp.applicationsAlternateAddress =
       inputJson.applicationsAlternateAddress;
     paperApp.income = inputJson.income;
+    if (inputJson.incomeVouchers.Section8 == "True") {
+      paperApp.incomeVouchers?.push("issuedVouchers");
+    }
+    if (inputJson.incomeVouchers.rentalAssistance == "True") {
+      paperApp.incomeVouchers?.push("rentalAssistance");
+    }
+    if (paperApp.incomeVouchers?.length == 0) {
+    }
+    paperApp.incomePeriod = IncomePeriodEnum.PerYear;
     paperApp.submissionDate = inputJson.submissionDate;
 
     if (this.isValid(inputJson)) {
@@ -100,12 +113,39 @@ export class DoorwayPaperApplications {
       if (inputJson["contactByLetter"] == "True") {
         paperApp.contactPreferences.push("letter");
       }
+      if (inputJson["contactByText"] == "True") {
+        paperApp.contactPreferences.push("text");
+      }
       const applicant = paperApp.applicant;
       applicant.firstName = inputJson.applicant.firstName;
       applicant.middleName = inputJson.applicant.middleName;
       applicant.lastName = inputJson.applicant.lastName;
+      const additionalPhone: PhoneNumber | undefined = parsePhoneNumber(
+        inputJson.applicant.phoneNumber,
+        "US",
+      );
+      paperApp.additionalPhoneNumber =
+        additionalPhone != undefined ? additionalPhone.number : "";
+      this.logger.debug(
+        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`,
+      );
 
-      applicant.phoneNumber = inputJson.applicant.phoneNumber;
+      if (paperApp.additionalPhoneNumber != "") {
+        paperApp.additionalPhoneNumber = inputJson.additionalPhone;
+        paperApp.additionalPhone = true;
+        if (inputJson.additionalPhoneIsMobile == "True") {
+          paperApp.additionalPhoneNumberType = "cell";
+        } else if (inputJson.additionalPhoneIsWork == "True") {
+          paperApp.additionalPhoneNumberType = "work";
+        } else {
+          paperApp.additionalPhoneNumberType = "home";
+        }
+      }
+      const phone: PhoneNumber | undefined = parsePhoneNumber(
+        inputJson.applicant.phoneNumber,
+        "US",
+      );
+      paperApp.applicant.phoneNumber = phone != undefined ? phone.number : "";
       if (inputJson.applicant.primaryPhoneIsMobile == "True") {
         applicant.phoneNumberType = "cell";
       } else if (inputJson.applicant.primaryPhoneIsWork == "True") {
@@ -113,6 +153,7 @@ export class DoorwayPaperApplications {
       } else {
         applicant.phoneNumberType = "home";
       }
+
       applicant.applicantAddress = inputJson.applicant.applicantAddress;
       if (inputJson.applicant.workInRegion == "True") {
         applicant.workInRegion = YesNoEnum.Yes;
@@ -121,10 +162,11 @@ export class DoorwayPaperApplications {
       }
 
       const DOB = new Date(Date.parse(inputJson.applicant.dateOfBirth));
+      this.logger.debug(DOB);
       applicant.birthMonth = (DOB.getMonth() + 1).toString();
-      applicant.birthDay = DOB.getDay().toString();
+      applicant.birthDay = DOB.getDate().toString();
       applicant.birthYear = DOB.getFullYear().toString();
-      if (EmailValidator.validate(inputJson.applicant.email)) {
+      if (EmailValidator.validate(inputJson.applicant.emailAddress)) {
         applicant.emailAddress = inputJson.applicant.emailAddress;
         applicant.noEmail = false;
       } else {
@@ -133,10 +175,26 @@ export class DoorwayPaperApplications {
       paperApp.alternateContact.firstName =
         inputJson.alternateContact.firstName;
       paperApp.alternateContact.lastName = inputJson.alternateContact.lastName;
+      if (
+        inputJson.alternateContact.emailAddress != "" &&
+        EmailValidator.validate(inputJson.alternateContact.emailAddress)
+      ) {
+        paperApp.alternateContact.emailAddress =
+          inputJson.alternateContact.emailAddress;
+      }
       paperApp.alternateContact.address = inputJson.alternateContact.address;
       paperApp.alternateContact.agency = inputJson.alternateContact.agency;
       paperApp.alternateContact.otherType =
         inputJson.alternateContact.otherType;
+      const altContactPhone: PhoneNumber | undefined = parsePhoneNumber(
+        inputJson.alternateContact.phoneNumber,
+        "US",
+      );
+      paperApp.alternateContact.phoneNumber =
+        altContactPhone != undefined ? altContactPhone.number : "";
+      this.logger.debug(
+        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`,
+      );
 
       if (inputJson.alternateContact.altContactFamily == "True") {
         paperApp.alternateContact.type =
@@ -362,73 +420,97 @@ export class DoorwayPaperApplications {
     paperApp.accessibility.vision = inputJson.accessibility.vision == "True";
     paperApp.accessibility.hearing = inputJson.accessibility.hearing == "True";
     const unitTypes: UnitType[] = await this.unitTypeService.getUnitTypes();
-    const studio = unitTypes.find((unitType: UnitType) => {
-      unitType.name == "studio";
-    });
-    const oneBr = unitTypes.find((unitType: UnitType) => {
-      unitType.name == "oneBdrm";
-    });
-    const twoBr = unitTypes.find((unitType: UnitType) => {
-      unitType.name == "twoBdrm";
-    });
-    const threeBr = unitTypes.find((unitType: UnitType) => {
-      unitType.name == "threeBdrm";
-    });
-    const fourBr = unitTypes.find((unitType: UnitType) => {
-      unitType.name == "fourBdrm";
-    });
+    this.logger.debug(unitTypes);
+    const studio = unitTypes.find(
+      (unitType: UnitType) => unitType.name === "studio",
+    );
+    this.logger.debug(studio);
+    const oneBr = unitTypes.find(
+      (unitType: UnitType) => unitType.name === "oneBdrm",
+    );
+    this.logger.debug(oneBr);
+    const twoBr = unitTypes.find(
+      (unitType: UnitType) => unitType.name === "twoBdrm",
+    );
+    this.logger.debug(twoBr);
+    const threeBr = unitTypes.find(
+      (unitType: UnitType) => unitType.name === "threeBdrm",
+    );
+    this.logger.debug(threeBr);
+    const fourBr = unitTypes.find(
+      (unitType: UnitType) => unitType.name == "fourBdrm",
+    );
+    this.logger.debug(fourBr);
 
-    paperApp.preferredUnitTypes = [];
-    if (inputJson.preferredUnitTypes.Studio == "True") {
-      paperApp.preferredUnitTypes.push({ id: studio!.id });
+    const preferredUnitTypes: IdDTO[] = [];
+    this.logger.debug(inputJson.preferredUnitTypes);
+    if (inputJson.preferredUnitTypes["Studio"] === "True") {
+      preferredUnitTypes.push({ id: studio!.id });
+      this.logger.debug(studio!.id);
+      this.logger.debug(preferredUnitTypes);
     }
-    if (inputJson.preferredUnitTypes["1BR"] == "True") {
-      paperApp.preferredUnitTypes.push({ id: oneBr!.id });
+    if (inputJson.preferredUnitTypes["1BR"] === "True") {
+      this.logger.debug("I GOT HERE!!!");
+      preferredUnitTypes.push({ id: oneBr!.id });
+      this.logger.debug(oneBr?.id);
+      this.logger.debug(preferredUnitTypes);
     }
-    if (inputJson.preferredUnitTypes["2BR"] == "True") {
-      paperApp.preferredUnitTypes.push({ id: twoBr!.id });
+    if (inputJson.preferredUnitTypes["2BR"] === "True") {
+      this.logger.debug("I GOT HERE!!!!");
+      preferredUnitTypes.push({ id: twoBr!.id });
+      this.logger.debug(twoBr!.id);
+      this.logger.debug(preferredUnitTypes);
     }
-    if (inputJson.preferredUnitTypes["3BR"] == "True") {
-      paperApp.preferredUnitTypes.push({ id: threeBr!.id });
+    if (inputJson.preferredUnitTypes["3BR"] === "True") {
+      preferredUnitTypes.push({ id: threeBr!.id });
+      this.logger.debug(threeBr!.id);
+      this.logger.debug(preferredUnitTypes);
     }
-    if (inputJson.preferredUnitTypes["4BR"] == "True") {
-      paperApp.preferredUnitTypes.push({ id: fourBr!.id });
+    if (inputJson.preferredUnitTypes["4BR"] === "True") {
+      preferredUnitTypes.push({ id: fourBr!.id });
+      this.logger.debug(fourBr!.id);
+      this.logger.debug(preferredUnitTypes);
     }
+    paperApp.preferredUnitTypes = preferredUnitTypes;
+    this.logger.debug(preferredUnitTypes);
+    this.logger.debug(`Preferred units: ${paperApp.preferredUnitTypes}`);
     paperApp.householdMember = [];
     const household: HouseholdMemberUpdate[] = inputJson.householdMember;
     for (let i = 0; i < household.length; i++) {
       if (household[i].firstName != "" && household[i].lastName != "") {
-        if ((household[i].relationship = undefined)) {
-          household[i].relationship = HouseholdMemberRelationship.Other;
-        }
-        household[i].householdMemberAddress = household[
-          i
-        ].householdMemberAddress = {
-          city: "",
-          county: "",
-          state: "",
+        const member: HouseholdMemberUpdate = {
+          householdMemberAddress: {
+            street: "",
+            city: "",
+            state: "",
+            zipCode: "",
+          },
+        };
+        member.householdMemberWorkAddress = {
           street: "",
           street2: "",
-          zipCode: "",
-        };
-        household[i].householdMemberWorkAddress = household[
-          i
-        ].householdMemberAddress = {
           city: "",
-          county: "",
           state: "",
-          street: "",
-          street2: "",
           zipCode: "",
         };
-        paperApp.householdMember.push(household[i]);
+        member.firstName = household[i].firstName;
+        member.middleName = household[i].middleName;
+        member.lastName = household[i].lastName;
+        const memberDOB = new Date(Date.parse(household[i]["dateOfBirth"]));
+        this.logger.debug(memberDOB);
+        member.birthMonth = (memberDOB.getMonth() + 1).toString();
+        member.birthDay = memberDOB.getDate().toString();
+        member.birthYear = memberDOB.getFullYear().toString();
+        member.relationship = HouseholdMemberRelationship.Other;
+
+        paperApp.householdMember.push(member);
       }
     }
 
     paperApp.listings.id = inputJson.listings.id;
     const listing = await this.listingsService.getListing(paperApp.listings.id);
     this.logger.info(
-      `Listing requested is ${listing.id} and is in status ${listing.status}`
+      `Listing requested is ${listing.id} and is in status ${listing.status}`,
     );
     if (listing.listingMultiselectQuestions != undefined) {
       const prefNames: object[] = [];
@@ -439,7 +521,7 @@ export class DoorwayPaperApplications {
             id: question.multiselectQuestions.id,
             description: question.multiselectQuestions.description,
           });
-        }
+        },
       );
       const listingSearch = new Fuse(prefNames, {
         keys: ["name", "description"],
@@ -490,6 +572,10 @@ export class DoorwayPaperApplications {
   }
 }
 export class PaperApplication implements ApplicationCreate {
+  acceptedTerms?: boolean;
+  language?: LanguagesEnum;
+  incomeVouchers?: string[];
+
   contactPreferences: string[];
   householdSize: number;
   status: ApplicationStatusEnum;
@@ -506,9 +592,18 @@ export class PaperApplication implements ApplicationCreate {
   preferredUnitTypes: IdDTO[];
   preferences?: ApplicationMultiselectQuestion[];
   income: string;
+  incomePeriod?: IncomePeriodEnum;
+  additionalPhone?: boolean;
+  additionalPhoneNumber?: string;
+  additionalPhoneNumberType?: string;
+  householdExpectingChanges?: boolean;
+  householdStudent?: boolean;
+
   constructor() {
     this.status = ApplicationStatusEnum.Draft;
     this.submissionType = ApplicationSubmissionTypeEnum.Paper;
+    this.additionalPhone = false;
+    this.additionalPhoneNumber = "";
     this.contactPreferences = [];
     this.applicant = {
       applicantAddress: {
@@ -537,5 +632,11 @@ export class PaperApplication implements ApplicationCreate {
     this.householdMember = [];
     this.demographics = { race: [], howDidYouHear: ["NA"] };
     this.accessibility = {};
+    this.preferredUnitTypes = [];
+    this.acceptedTerms = true;
+    this.language = LanguagesEnum.En;
+    this.incomeVouchers = [];
+    this.householdExpectingChanges = false;
+    this.householdStudent = false;
   }
 }

@@ -14,6 +14,23 @@
     "income": {
       "type": "string"
     },
+    "incomeVouchers": {
+      "type": "object",
+      "properties": {
+        "Section8": {
+          "type": "string"
+        },
+        "rentalAssistance": {
+          "type": "string"
+        }
+      }
+    },
+    "householdStudent": {
+      "type": "string"
+    },
+    "householdExpectingChanges": {
+      "type": "string"
+    },
     "contactByEmail": {
       "type": "string"
     },
@@ -505,30 +522,25 @@
       "required": ["mobility", "vision", "hearing"]
     },
     "preferredUnitTypes": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "Studio": {
-              "type": "string"
-            },
-            "1BR": {
-              "type": "string"
-            },
-            "2BR": {
-              "type": "string"
-            },
-            "3BR": {
-              "type": "string"
-            },
-            "4BR": {
-              "type": "string"
-            }
-          },
-          "required": ["Studio", "1BR", "2BR", "3BR", "4BR"]
+      "type": "object",
+      "properties": {
+        "Studio": {
+          "type": "string"
+        },
+        "1BR": {
+          "type": "string"
+        },
+        "2BR": {
+          "type": "string"
+        },
+        "3BR": {
+          "type": "string"
+        },
+        "4BR": {
+          "type": "string"
         }
-      ]
+      },
+      "required": ["Studio", "1BR", "2BR", "3BR", "4BR"]
     },
     "householdMember": {
       "type": "array",

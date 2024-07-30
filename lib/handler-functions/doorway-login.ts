@@ -20,15 +20,17 @@ export class DoorwayLogin {
       });
       logger.debug(login);
 
-      let cookies = login.headers["set-cookie"];
-      logger.debug(`cookies type: ${typeof cookies}`);
+      let cookies: string[] = login.headers["set-cookie"]!;
+
+      logger.info(`cookies type: ${typeof cookies}`);
+      logger.debug(`${cookies}`);
 
       const accessToken = cookies!.find((token) =>
-        token.startsWith("access-token")
+        token.startsWith("access-token"),
       );
       logger.debug(`Access Token: ${accessToken}`);
       const refreshToken = cookies!.find((token) =>
-        token.startsWith("refresh-token")
+        token.startsWith("refresh-token"),
       );
       logger.debug(`RefreshToken: ${refreshToken}`);
 

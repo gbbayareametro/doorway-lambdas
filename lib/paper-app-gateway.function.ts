@@ -13,11 +13,11 @@ import { DoorwayPaperApplications } from "./handler-functions/paper-applications
 
 export const handler = async (
   event: APIGatewayProxyEvent,
-  context: Context
+  context: Context,
 ): Promise<APIGatewayProxyResult> => {
   const logger = instance;
-  logger.debug(`EVENT:\n ${event}`);
-  logger.debug(event);
+  logger.debug(`EVENT:`);
+  logger.debug(event.body);
   const application = event.body != null ? JSON.parse(event.body) : {};
 
   const secretName = process.env.DOORWAY_LOGIN_SECRET
@@ -47,7 +47,7 @@ export const handler = async (
         dwUser,
         dwPassword,
         doorwayApi,
-        passkey
+        passkey,
       );
       const dwApplication = await applicationInterface.transform(application);
 
