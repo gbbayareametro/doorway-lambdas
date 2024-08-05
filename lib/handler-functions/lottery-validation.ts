@@ -1,4 +1,4 @@
-import Joi, * as joi from "joi";
+import * as joi from "joi";
 import { DoorwayInterface } from "./doorway-interface";
 import { Application, ApplicationCreate } from "../../api/Api";
 
@@ -9,7 +9,7 @@ export class LotteryValidator {
   constructor(user: string, password: string, url: string) {
     this.doorwayInterface = new DoorwayInterface(user, password, url);
   }
-  lotteryLineIsValid(json: object, application: Application): boolean {
+  fixedFieldsAreValid(json: object, application: Application): boolean {
     logger.info(`Validating line for ${application.id}`);
     const schema = joi
       .object({
@@ -63,8 +63,11 @@ export class LotteryValidator {
           .valid(application.applicant.phoneNumberType),
         "Primary Applicant Additional Phone Number": joi
           .string()
-          .allow("")
-          .valid(application.additionalPhoneNumber),
+          .valid(
+            application.additionalPhoneNumber == null
+              ? ""
+              : application.additionalPhoneNumber
+          ),
         "Primary Applicant Preferred Contact Type": joi
           .string()
           .allow("")
@@ -85,32 +88,166 @@ export class LotteryValidator {
         "Primary Applicant Zip Code": joi
           .string()
           .valid(application.applicationsMailingAddress.zipCode),
-        "Primary Applicant Mailing Street": joi.string().allow(""),
-        "Primary Applicant Mailing Street 2": joi.string().allow(""),
-        "Primary Applicant Mailing City": joi.string().allow(""),
-        "Primary Applicant Mailing State": joi.string().allow(""),
-        "Primary Applicant Mailing Zip Code": joi.string().allow(""),
-        "Primary Applicant Work Street": joi.string().allow(""),
-        "Primary Applicant Work Street 2": joi.string().allow(""),
-        "Primary Applicant Work City": joi.string().allow(""),
-        "Primary Applicant Work State": joi.string().allow(""),
-        "Primary Applicant Work Zip Code": joi.string().allow(""),
-        Race: joi.string().allow(""),
-        Ethnicity: joi.string().allow(""),
-        "Alternate Contact First Name": joi.string().allow(""),
-        "Alternate Contact Last Name": joi.string().allow(""),
-        "Alternate Contact Type": joi.string().allow(""),
-        "Alternate Contact Agency": joi.string().allow(""),
-        "Alternate Contact Other Type": joi.string().allow(""),
-        "Alternate Contact Email Address": joi.string().allow(""),
-        "Alternate Contact Phone Number": joi.string().allow(""),
-        "Alternate Contact Street": joi.string().allow(""),
-        "Alternate Contact Street 2": joi.string().allow(""),
-        "Alternate Contact City": joi.string().allow(""),
-        "Alternate Contact State": joi.string().allow(""),
-        "Alternate Contact Zip Code": joi.string().allow(""),
-        Income: joi.string(),
-        "Income Period": joi.string(),
+        "Primary Applicant Mailing Street": joi
+          .string()
+          .valid(application.applicant.applicantAddress.street),
+        "Primary Applicant Mailing Street 2": joi
+          .string()
+          .valid(
+            application.applicationsMailingAddress.street2 == null
+              ? ""
+              : application.applicationsMailingAddress.street2
+          ),
+        "Primary Applicant Mailing City": joi
+          .string()
+          .valid(
+            application.applicationsMailingAddress.city == null
+              ? ""
+              : application.applicationsMailingAddress.city
+          ),
+        "Primary Applicant Mailing State": joi
+          .string()
+          .valid(
+            application.applicationsMailingAddress.state == null
+              ? ""
+              : application.applicationsMailingAddress.state
+          ),
+        "Primary Applicant Mailing Zip Code": joi
+          .string()
+          .valid(
+            application.applicationsMailingAddress.zipCode == null
+              ? ""
+              : application.applicationsMailingAddress.zipCode
+          ),
+        "Primary Applicant Work Street": joi
+          .string()
+          .valid(
+            application.applicant.applicantWorkAddress.street == null
+              ? ""
+              : application.applicant.applicantWorkAddress.street
+          ),
+        "Primary Applicant Work Street 2": joi
+          .string()
+          .valid(
+            application.applicant.applicantWorkAddress.street2 == null
+              ? ""
+              : application.applicant.applicantWorkAddress.street2
+          ),
+        "Primary Applicant Work City": joi
+          .string()
+          .valid(
+            application.applicant.applicantWorkAddress.city == null
+              ? ""
+              : application.applicant.applicantWorkAddress.city
+          ),
+        "Primary Applicant Work State": joi
+          .string()
+          .valid(
+            application.applicant.applicantWorkAddress.state == null
+              ? ""
+              : application.applicant.applicantWorkAddress.state
+          ),
+        "Primary Applicant Work Zip Code": joi
+          .string()
+          .valid(
+            application.applicant.applicantWorkAddress.zipCode == null
+              ? ""
+              : application.applicant.applicantWorkAddress.zipCode
+          ),
+        "Alternate Contact First Name": joi
+          .string()
+          .valid(
+            application.alternateContact.firstName == null
+              ? ""
+              : application.alternateContact.firstName
+          ),
+        "Alternate Contact Last Name": joi
+          .string()
+          .valid(
+            application.alternateContact.lastName == null
+              ? ""
+              : application.alternateContact.lastName
+          ),
+        "Alternate Contact Type": joi
+          .string()
+          .valid(
+            application.alternateContact.type == null
+              ? ""
+              : application.alternateContact.type
+          ),
+        "Alternate Contact Agency": joi
+          .string()
+          .valid(
+            application.alternateContact.agency == null
+              ? ""
+              : application.alternateContact.agency
+          ),
+        "Alternate Contact Other Type": joi
+          .string()
+          .valid(
+            application.alternateContact.otherType == null
+              ? ""
+              : application.alternateContact.otherType
+          ),
+        "Alternate Contact Email Address": joi
+          .string()
+          .valid(
+            application.alternateContact.emailAddress == null
+              ? ""
+              : application.alternateContact.emailAddress
+          )
+          .insensitive(),
+        "Alternate Contact Phone Number": joi
+          .string()
+          .valid(
+            application.alternateContact.phoneNumber == null
+              ? ""
+              : application.alternateContact.phoneNumber
+          )
+          .insensitive(),
+        "Alternate Contact Street": joi
+          .string()
+          .valid(
+            application.alternateContact.address?.street == null
+              ? ""
+              : application.alternateContact.address?.street
+          ),
+        "Alternate Contact Street 2": joi
+          .string()
+          .valid(
+            application.alternateContact.address?.street2 == null
+              ? ""
+              : application.alternateContact.address?.street2
+          ),
+        "Alternate Contact City": joi
+          .string()
+          .valid(
+            application.alternateContact.address?.city == null
+              ? ""
+              : application.alternateContact.address?.city
+          ),
+        "Alternate Contact State": joi
+          .string()
+          .valid(
+            application.alternateContact.address?.state == null
+              ? ""
+              : application.alternateContact.address?.state
+          ),
+        "Alternate Contact Zip Code": joi
+          .string()
+          .valid(
+            application.alternateContact.address?.zipCode == null
+              ? ""
+              : application.alternateContact.address?.zipCode
+          ),
+        Income: joi
+          .string()
+          .valid(application.income == null ? "" : application.income),
+        "Income Period": joi
+          .string()
+          .valid(
+            application.incomePeriod == null ? "" : application.incomePeriod
+          ),
         "Accessibility Mobility": joi
           .string()
           .valid(
@@ -169,20 +306,6 @@ export class LotteryValidator {
         "Preference: San Jose Anti-Displacement Preference": joi.string(),
         "Preference: San Jose Anti-Displacement Preference I would like to be considered for this preference - Address":
           joi.string().allow(""),
-        "Household Members (1) First Name": joi.string().allow(""),
-        "Household Members (1) Middle Name": joi.string().allow(""),
-        "Household Members (1) Last Name": joi.string().allow(""),
-        "Household Members (1) Birthday": joi.string().allow(""),
-        "Household Members (1) Same Address as Primary Applicant": joi
-          .string()
-          .valid("Yes", "No"),
-        "Household Members (1) Relationship": joi.string().allow(""),
-        "Household Members (1) Work in Region": joi.string().valid("Yes", "No"),
-        "Household Members (1) Street": joi.string().allow(""),
-        "Household Members (1) Street 2": joi.string().allow(""),
-        "Household Members (1) City": joi.string().allow(""),
-        "Household Members (1) State": joi.string().allow(""),
-        "Household Members (1) Zip Code": joi.string().allow(""),
       })
       .unknown(true);
 
@@ -195,5 +318,27 @@ export class LotteryValidator {
       logger.error(error.message);
       return false;
     }
+  }
+  householdMembersAreValid(json: object, application: Application) {
+    //      "Household Member (1) First Name": joi
+    //         .string()
+    //         .valid(
+    //           application.householdMember != undefined
+    //             ? application.householdMember[0]
+    //             : ""
+    //         ),
+    //       "Household Member (1) Middle Name": joi.string().allow(""),
+    //       "Household Member (1) Last Name": joi.string().allow(""),
+    //       "Household Member (1) Birthday": joi.string().allow(""),
+    //       "Household Member (1) Same Address as Primary Applicant": joi
+    //         .string()
+    //         .valid("Yes", "No"),
+    //       "Household Member (1) Relationship": joi.string().allow(""),
+    //       "Household Member (1) Work in Region": joi.string().valid("Yes", "No"),
+    //       "Household Member (1) Street": joi.string().allow(""),
+    //       "Household Member (1) Street 2": joi.string().allow(""),
+    //       "Household Member (1) City": joi.string().allow(""),
+    //       "Household Member (1) State": joi.string().allow(""),
+    //       "Household Member (1) Zip Code": joi.string().allow(""),
   }
 }

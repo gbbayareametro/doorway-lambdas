@@ -4,13 +4,7 @@ import * as fs from "fs";
 import { startDoorway } from "./mockDoorway";
 import mockAppsForListing from "./getApplicationsForListingMockResponse.json";
 import mockAppsForListingBAD from "./getApplicationsForListingMock_BAD_Response.json";
-import {
-  Application,
-  ApplicationUpdate,
-  PaginatedApplicationDto,
-} from "../../api/Api";
-import { ValidationError } from "jsonschema";
-import { error } from "console";
+import { Application } from "../../api/Api";
 beforeAll(() => {
   startDoorway();
 });
@@ -36,7 +30,7 @@ describe("ValidateLottery", () => {
           application.id === jsonObject["Application Id"]
       );
 
-      expect(validator.lotteryLineIsValid(jsonObject, app!)).toBeTruthy();
+      expect(validator.fixedFieldsAreValid(jsonObject, app!)).toBeTruthy();
     });
   });
   test("Fail when Schema is invalid", async () => {
@@ -57,7 +51,7 @@ describe("ValidateLottery", () => {
         (application: Application) =>
           application.id === jsonObject["Application Id"]
       );
-      expect(validator.lotteryLineIsValid(jsonObject, app!)).toBeFalsy();
+      expect(validator.fixedFieldsAreValid(jsonObject, app!)).toBeFalsy();
     });
   });
 });
