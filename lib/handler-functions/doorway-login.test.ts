@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { DoorwayLogin } from "./doorway-login";
 import { startDoorway } from "./mockDoorway";
 
@@ -22,6 +23,6 @@ describe("API Login Tests", () => {
     const doorwayLogin = new DoorwayLogin(user, password, url);
     expect(async () => {
       await doorwayLogin.login();
-    }).rejects.toBeInstanceOf("AxiosError");
+    }).rejects.toThrow(AxiosError);
   });
 });
