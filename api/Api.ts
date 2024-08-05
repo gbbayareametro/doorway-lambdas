@@ -283,18 +283,15 @@ export interface ListingEvent {
 export interface Address {
   id: string;
   /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
-  placeName?: string;
+  placeName?: string | null;
   city: string;
-  county?: string;
+  county?: string | null;
   state: string;
   street: string;
-  street2?: string;
+  street2?: string | null;
   zipCode: string;
-  latitude?: number;
-  longitude?: number;
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
 export interface ListingImage {
@@ -947,10 +944,6 @@ export enum ApplicationReviewStatusEnum {
 
 export interface Accessibility {
   id: string;
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
   mobility?: boolean;
   vision?: boolean;
   hearing?: boolean;
@@ -977,12 +970,8 @@ export enum YesNoEnum {
 
 export interface Applicant {
   id: string;
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
   firstName?: string;
-  middleName?: string;
+  middleName?: string | null;
   lastName?: string;
   birthMonth?: string;
   birthDay?: string;
@@ -992,7 +981,7 @@ export interface Applicant {
   phoneNumber?: string;
   phoneNumberType?: string;
   noPhone?: boolean;
-  workInRegion?: YesNoEnum;
+  workInRegion?: string;
   applicantWorkAddress: Address;
   applicantAddress: Address;
 }
@@ -1007,18 +996,14 @@ export enum AlternateContactRelationship {
 
 export interface AlternateContact {
   id: string;
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
-  type?: AlternateContactRelationship;
-  otherType?: string;
-  firstName?: string;
-  lastName?: string;
-  agency?: string;
-  phoneNumber?: string;
-  emailAddress?: string;
-  address: Address;
+  type?: string;
+  otherType?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  agency?: string | null;
+  phoneNumber?: string | null;
+  emailAddress?: string | null;
+  address: Address | null;
 }
 
 export enum HouseholdMemberRelationship {
@@ -1041,22 +1026,18 @@ export enum HouseholdMemberRelationship {
 
 export interface HouseholdMember {
   id: string;
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
   orderId?: number;
   firstName?: string;
-  middleName?: string;
+  middleName?: string | null;
   lastName?: string;
   birthMonth?: string;
   birthDay?: string;
   birthYear?: string;
-  sameAddress?: YesNoEnum;
-  relationship?: HouseholdMemberRelationship;
-  workInRegion?: YesNoEnum;
-  householdMemberWorkAddress?: Address;
-  householdMemberAddress: Address;
+  sameAddress?: YesNoEnum | null;
+  relationship?: HouseholdMemberRelationship | null;
+  workInRegion?: YesNoEnum | null;
+  householdMemberWorkAddress?: Address | null;
+  householdMemberAddress?: Address | null;
 }
 
 export interface ApplicationMultiselectQuestionOption {
@@ -1080,38 +1061,38 @@ export interface Application {
   /** @format date-time */
   updatedAt: string;
   /** @format date-time */
-  deletedAt?: string;
+  deletedAt?: string | null;
   appUrl?: string;
   additionalPhone?: boolean;
-  additionalPhoneNumber?: string;
-  additionalPhoneNumberType?: string;
+  additionalPhoneNumber?: string | null;
+  additionalPhoneNumberType?: string | null;
   contactPreferences: string[];
   householdSize: number;
-  housingStatus?: string;
+  housingStatus?: string | null;
   sendMailToMailingAddress?: boolean;
-  householdExpectingChanges?: boolean;
-  householdStudent?: boolean;
-  incomeVouchers?: string[];
+  householdExpectingChanges?: boolean | null;
+  householdStudent?: boolean | null;
+  incomeVouchers?: boolean;
   income?: string;
-  incomePeriod?: IncomePeriodEnum;
-  status: ApplicationStatusEnum;
-  language?: LanguagesEnum;
-  acceptedTerms?: boolean;
-  submissionType: ApplicationSubmissionTypeEnum;
+  incomePeriod?: string;
+  status: string;
+  language?: string | null;
+  acceptedTerms?: boolean | null;
+  submissionType: string;
   /** @format date-time */
   submissionDate?: string;
   markedAsDuplicate: boolean;
   flagged?: boolean;
   confirmationCode: string;
-  reviewStatus?: ApplicationReviewStatusEnum;
+  reviewStatus?: string;
   applicationsMailingAddress: Address;
-  applicationsAlternateAddress: Address;
-  accessibility: Accessibility;
-  demographics: Demographic;
-  preferredUnitTypes: UnitType[];
+  applicationsAlternateAddress: Address | null;
+  accessibility: Accessibility | null;
+  demographics?: Demographic;
+  preferredUnitTypes?: UnitType[];
   applicant: Applicant;
   alternateContact: AlternateContact;
-  householdMember: HouseholdMember[];
+  householdMember: HouseholdMember[] | null;
   preferences?: ApplicationMultiselectQuestion[];
   programs?: ApplicationMultiselectQuestion[];
   listings: IdDTO;
@@ -1252,7 +1233,12 @@ export interface JurisdictionCreate {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
+  listingApprovalPermissions: (
+    | "user"
+    | "partner"
+    | "admin"
+    | "jurisdictionAdmin"
+  )[];
 }
 
 export interface JurisdictionUpdate {
@@ -1273,7 +1259,12 @@ export interface JurisdictionUpdate {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
+  listingApprovalPermissions: (
+    | "user"
+    | "partner"
+    | "admin"
+    | "jurisdictionAdmin"
+  )[];
 }
 
 export interface Jurisdiction {
@@ -1299,7 +1290,12 @@ export interface Jurisdiction {
   enableUtilitiesIncluded: boolean;
   allowSingleUseCodeLogin: boolean;
   /** @example ["admin"] */
-  listingApprovalPermissions: ("user" | "partner" | "admin" | "jurisdictionAdmin")[];
+  listingApprovalPermissions: (
+    | "user"
+    | "partner"
+    | "admin"
+    | "jurisdictionAdmin"
+  )[];
 }
 
 export interface MultiselectQuestionCreate {
@@ -1405,7 +1401,7 @@ export interface AlternateContactUpdate {
   otherType?: string;
   firstName?: string;
   lastName?: string;
-  agency?: string;
+  agency?: string | null;
   phoneNumber?: string;
   emailAddress?: string;
   address: AddressCreate;
@@ -1714,16 +1710,22 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
   baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  securityWorker?: (
+    securityData: SecurityDataType | null
+  ) => Promise<RequestParams | void> | RequestParams | void;
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -1742,7 +1744,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
+    fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
     credentials: "same-origin",
@@ -1761,7 +1764,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
-    return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
+    return `${encodedKey}=${encodeURIComponent(
+      typeof value === "number" ? value : `${value}`
+    )}`;
   }
 
   protected addQueryParam(query: QueryParamsType, key: string) {
@@ -1775,9 +1780,15 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    const keys = Object.keys(query).filter(
+      (key) => "undefined" !== typeof query[key]
+    );
     return keys
-      .map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
+      .map((key) =>
+        Array.isArray(query[key])
+          ? this.addArrayQueryParam(query, key)
+          : this.addQueryParam(query, key)
+      )
       .join("&");
   }
 
@@ -1788,8 +1799,13 @@ export class HttpClient<SecurityDataType = unknown> {
 
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
-      input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
-    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
+      input !== null && (typeof input === "object" || typeof input === "string")
+        ? JSON.stringify(input)
+        : input,
+    [ContentType.Text]: (input: any) =>
+      input !== null && typeof input !== "string"
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -1798,15 +1814,18 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-              ? JSON.stringify(property)
-              : `${property}`,
+            ? JSON.stringify(property)
+            : `${property}`
         );
         return formData;
       }, new FormData()),
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(
+    params1: RequestParams,
+    params2?: RequestParams
+  ): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -1819,7 +1838,9 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (
+    cancelToken: CancelToken
+  ): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -1863,15 +1884,28 @@ export class HttpClient<SecurityDataType = unknown> {
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
 
-    return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
-      ...requestParams,
-      headers: {
-        ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
-      },
-      signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
-      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
-    }).then(async (response) => {
+    return this.customFetch(
+      `${baseUrl || this.baseUrl || ""}${path}${
+        queryString ? `?${queryString}` : ""
+      }`,
+      {
+        ...requestParams,
+        headers: {
+          ...(requestParams.headers || {}),
+          ...(type && type !== ContentType.FormData
+            ? { "Content-Type": type }
+            : {}),
+        },
+        signal:
+          (cancelToken
+            ? this.createAbortSignal(cancelToken)
+            : requestParams.signal) || null,
+        body:
+          typeof body === "undefined" || body === null
+            ? null
+            : payloadFormatter(body),
+      }
+    ).then(async (response) => {
       const r = response.clone() as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
@@ -1909,7 +1943,9 @@ export class HttpClient<SecurityDataType = unknown> {
  *
  * The API for Bloom
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -1992,7 +2028,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaginatedListingDto, any>({
         path: `/listings`,
@@ -2068,7 +2104,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/listings/combined`,
@@ -2090,7 +2126,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "America/Los_Angeles" */
         timeZone?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/listings/csv`,
@@ -2113,7 +2149,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "full" */
         view?: ListingViews;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<string, any>({
         path: `/listings/external/${id}`,
@@ -2137,7 +2173,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "full" */
         view?: ListingViews;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Listing, any>({
         path: `/listings/${id}`,
@@ -2207,7 +2243,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get listings by multiselect question id
      * @request GET:/listings/byMultiselectQuestion/{multiselectQuestionId}
      */
-    retrieveListings: (multiselectQuestionId: string, params: RequestParams = {}) =>
+    retrieveListings: (
+      multiselectQuestionId: string,
+      params: RequestParams = {}
+    ) =>
       this.request<IdDTO[], any>({
         path: `/listings/byMultiselectQuestion/${multiselectQuestionId}`,
         method: "GET",
@@ -2242,7 +2281,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaginatedAfsDto, any>({
         path: `/applicationFlaggedSets`,
@@ -2278,7 +2317,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<AfsMeta, any>({
         path: `/applicationFlaggedSets/meta`,
@@ -2312,7 +2351,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Reset flagged set confirmation alert
      * @request PUT:/applicationFlaggedSets/{afsId}
      */
-    resetConfirmationAlert: (afsId: string, data: IdDTO, params: RequestParams = {}) =>
+    resetConfirmationAlert: (
+      afsId: string,
+      data: IdDTO,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/applicationFlaggedSets/${afsId}`,
         method: "PUT",
@@ -2369,7 +2412,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<AmiChart[], any>({
         path: `/amiCharts`,
@@ -2439,7 +2482,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update amiChart
      * @request PUT:/amiCharts/{amiChartId}
      */
-    update: (amiChartId: string, data: AmiChartUpdate, params: RequestParams = {}) =>
+    update: (
+      amiChartId: string,
+      data: AmiChartUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<AmiChart, any>({
         path: `/amiCharts/${amiChartId}`,
         method: "PUT",
@@ -2462,7 +2509,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ReservedCommunityType[], any>({
         path: `/reservedCommunityTypes`,
@@ -2532,7 +2579,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update reservedCommunityType
      * @request PUT:/reservedCommunityTypes/{reservedCommunityTypeId}
      */
-    update: (reservedCommunityTypeId: string, data: ReservedCommunityTypeUpdate, params: RequestParams = {}) =>
+    update: (
+      reservedCommunityTypeId: string,
+      data: ReservedCommunityTypeUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<ReservedCommunityType, any>({
         path: `/reservedCommunityTypes/${reservedCommunityTypeId}`,
         method: "PUT",
@@ -2619,7 +2670,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update unitType
      * @request PUT:/unitTypes/{unitTypeId}
      */
-    update: (unitTypeId: string, data: UnitTypeUpdate, params: RequestParams = {}) =>
+    update: (
+      unitTypeId: string,
+      data: UnitTypeUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<UnitType, any>({
         path: `/unitTypes/${unitTypeId}`,
         method: "PUT",
@@ -2654,7 +2709,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create unitAccessibilityPriorityType
      * @request POST:/unitAccessibilityPriorityTypes
      */
-    create: (data: UnitAccessibilityPriorityTypeCreate, params: RequestParams = {}) =>
+    create: (
+      data: UnitAccessibilityPriorityTypeCreate,
+      params: RequestParams = {}
+    ) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes`,
         method: "POST",
@@ -2690,7 +2748,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get unitAccessibilityPriorityType by id
      * @request GET:/unitAccessibilityPriorityTypes/{unitAccessibilityPriorityTypeId}
      */
-    retrieve: (unitAccessibilityPriorityTypeId: string, params: RequestParams = {}) =>
+    retrieve: (
+      unitAccessibilityPriorityTypeId: string,
+      params: RequestParams = {}
+    ) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes/${unitAccessibilityPriorityTypeId}`,
         method: "GET",
@@ -2709,7 +2770,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     update: (
       unitAccessibilityPriorityTypeId: string,
       data: UnitAccessibilityPriorityTypeUpdate,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<UnitAccessibilityPriorityType, any>({
         path: `/unitAccessibilityPriorityTypes/${unitAccessibilityPriorityTypeId}`,
@@ -2797,7 +2858,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update unitRentType
      * @request PUT:/unitRentTypes/{unitRentTypeId}
      */
-    update: (unitRentTypeId: string, data: UnitRentTypeUpdate, params: RequestParams = {}) =>
+    update: (
+      unitRentTypeId: string,
+      data: UnitRentTypeUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<UnitRentType, any>({
         path: `/unitRentTypes/${unitRentTypeId}`,
         method: "PUT",
@@ -2884,7 +2949,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update jurisdiction
      * @request PUT:/jurisdictions/{jurisdictionId}
      */
-    update: (jurisdictionId: string, data: JurisdictionUpdate, params: RequestParams = {}) =>
+    update: (
+      jurisdictionId: string,
+      data: JurisdictionUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<Jurisdiction, any>({
         path: `/jurisdictions/${jurisdictionId}`,
         method: "PUT",
@@ -2924,7 +2993,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example {"$comparison":"=","applicationSection":"programs"} */
         filter?: MultiselectQuestionFilterParams[];
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<MultiselectQuestion[], any>({
         path: `/multiselectQuestions`,
@@ -2994,7 +3063,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update multiselect question
      * @request PUT:/multiselectQuestions/{multiselectQuestionId}
      */
-    update: (multiselectQuestionId: string, data: MultiselectQuestionUpdate, params: RequestParams = {}) =>
+    update: (
+      multiselectQuestionId: string,
+      data: MultiselectQuestionUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<MultiselectQuestion, any>({
         path: `/multiselectQuestions/${multiselectQuestionId}`,
         method: "PUT",
@@ -3038,7 +3111,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example true */
         markedAsDuplicate?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaginatedApplicationDto, any>({
         path: `/applications`,
@@ -3097,7 +3170,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "userId" */
         userId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Application, any>({
         path: `/applications/mostRecentlyCreated`,
@@ -3123,7 +3196,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "America/Los_Angeles" */
         timeZone?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/applications/csv`,
@@ -3156,7 +3229,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update application by id
      * @request PUT:/applications/{applicationId}
      */
-    update: (id: string, applicationId: string, data: ApplicationUpdate, params: RequestParams = {}) =>
+    update: (
+      id: string,
+      applicationId: string,
+      data: ApplicationUpdate,
+      params: RequestParams = {}
+    ) =>
       this.request<Application, any>({
         path: `/applications/${applicationId}`,
         method: "PUT",
@@ -3192,7 +3270,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Verify application can be saved
      * @request POST:/applications/verify
      */
-    submissionValidation: (data: ApplicationCreate, params: RequestParams = {}) =>
+    submissionValidation: (
+      data: ApplicationCreate,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/applications/verify`,
         method: "POST",
@@ -3244,7 +3325,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         limit?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/asset`,
@@ -3280,7 +3361,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/asset/presigned-upload-metadata
      * @secure
      */
-    createPresignedUploadMetadata: (data: CreatePresignedUploadMetadata, params: RequestParams = {}) =>
+    createPresignedUploadMetadata: (
+      data: CreatePresignedUploadMetadata,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/asset/presigned-upload-metadata`,
         method: "POST",
@@ -3356,7 +3440,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example true */
         noWelcomeEmail?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<User, any>({
         path: `/user`,
@@ -3393,7 +3477,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @example "search" */
         search?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaginatedUserDto, any>({
         path: `/user/list`,
@@ -3496,7 +3580,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Request single use code
      * @request POST:/user/request-single-use-code
      */
-    requestSingleUseCode: (data: RequestSingleUseCode, params: RequestParams = {}) =>
+    requestSingleUseCode: (
+      data: RequestSingleUseCode,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/user/request-single-use-code`,
         method: "POST",
@@ -3532,7 +3619,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Resend partner confirmation
      * @request POST:/user/resend-partner-confirmation
      */
-    resendPartnerConfirmation: (data: EmailAndAppUrl, params: RequestParams = {}) =>
+    resendPartnerConfirmation: (
+      data: EmailAndAppUrl,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/user/resend-partner-confirmation`,
         method: "POST",
@@ -3550,7 +3640,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Verifies token is valid
      * @request POST:/user/is-confirmation-token-valid
      */
-    isUserConfirmationTokenValid: (data: ConfirmationRequest, params: RequestParams = {}) =>
+    isUserConfirmationTokenValid: (
+      data: ConfirmationRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/user/is-confirmation-token-valid`,
         method: "POST",
@@ -3587,7 +3680,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary LoginViaSingleUseCode
      * @request POST:/auth/loginViaSingleUseCode
      */
-    loginViaASingleUseCode: (data: LoginViaSingleUseCode, params: RequestParams = {}) =>
+    loginViaASingleUseCode: (
+      data: LoginViaSingleUseCode,
+      params: RequestParams = {}
+    ) =>
       this.request<SuccessDTO, any>({
         path: `/auth/loginViaSingleUseCode`,
         method: "POST",
@@ -3696,7 +3792,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         jurisdictionId?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<MapLayerDto[], any>({
         path: `/mapLayers`,

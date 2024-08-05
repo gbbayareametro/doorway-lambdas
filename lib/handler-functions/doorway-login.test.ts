@@ -1,32 +1,27 @@
 import { DoorwayLogin } from "./doorway-login";
-import { server } from "./mockLogin";
+import { startDoorway } from "./mockDoorway";
 
 beforeAll(() => {
-  server.listen();
-  jest.resetModules();
+  startDoorway();
 });
 describe("API Login Tests", () => {
   test("Successful Login", async () => {
-    // process.env.DOORWAY_API = "https://doorway";
-    // process.env.DOORWAY_PASSKEY = "passkey";
-    // const user = "good.user@gooduser.com";
-    // const password = "goodpassword";
-    // const doorwayLogin = new DoorwayLogin(user, password);
-    // const response = await doorwayLogin.login();
-    // console.log(`RESPONSE!!! ${response}`);
-    // expect(response["accessToken"]).not.toBeNull();
-    // expect(response["refreshToken"]).not.toBeNull();
-    // expect(response["accessToken"]).toBe("access-token=thisismyaccesstoken");
-    expect(true).toBe(true);
+    const login = new DoorwayLogin(
+      "good.user@gooduser.com",
+      "goodpassword",
+      "https://doorway"
+    );
+    const tokens = await login.login();
+    expect(tokens["accessToken"]).toBe("access-token=thisismyaccesstoken");
   });
-  // test("Failed Login", async () => {
-  //   process.env.DOORWAY_API = "https://doorway";
-  //   process.env.DOORWAY_PASSKEY = "passkey";
-  //   const user = "bad.user@gooduser.com";
-  //   const password = "badpassword";
-  //   const doorwayLogin = new DoorwayLogin(user, password);
-  //   expect(async () => {
-  //     await doorwayLogin.login();
-  //   }).rejects.toContain(" status code 401");
-  // });
+  test("Failed Login", async () => {
+    const url = "https://doorway";
+    const passkey = "passkey";
+    const user = "bad.user@gooduser.com";
+    const password = "badpassword";
+    const doorwayLogin = new DoorwayLogin(user, password, url);
+    expect(async () => {
+      await doorwayLogin.login();
+    }).rejects.toContain(" status code 401");
+  });
 });

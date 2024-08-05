@@ -1,17 +1,27 @@
 import Fuse from "fuse.js";
 
-import { MatchingError } from "./matching-error";
+import { MatchingError } from "./custom-errors";
 import { instance } from "./winston.logger";
 import { Api, Listing } from "../../api/Api";
 import { error } from "console";
+import { DoorwayInterface } from "./doorway-interface";
+import { userInfo } from "os";
 
 export class ListingsInterface {
-  constructor(url: string, passkey: string, maxListings: number = 10000) {
+  constructor(
+    user: string,
+    password: string,
+    url: string,
+    passkey: string,
+    maxListings: number = 10000
+  ) {
     this.url = url;
     this.logger = instance;
     this.maxListings = maxListings;
     this.passkey = passkey;
+    this.doorwayInterface = new DoorwayInterface(user, password, url);
   }
+  doorwayInterface: DoorwayInterface;
   url: string;
   passkey: string;
   maxListings: number;
@@ -21,39 +31,16 @@ export class ListingsInterface {
     return this.url;
   }
   async getAllListings(): Promise<Listing[]> {
-    const api = new Api({
-      baseUrl: this.url,
-    });
     this.logger.debug("Calling listings API");
-    const response = await api.listings.list({
-      page: 1,
-      limit: this.maxListings,
-    });
-    if (response.status > 299) {
-      if (response.status == 401) {
-        this.logger.error(
-          `We were unautuhorized to get listings from ${this.url},  Check the environment variables DOORWAY_API and PASSKEY to make sure they are set properly`
-        );
-        this.logger.error(response.statusText);
-        throw new error(
-          `We were unautuhorized to get listings from ${this.url}`
-        );
-      } else {
-        this.logger.error(
-          `getting all listings from ${this.url} failed with a status code of ${response.status}`
-        );
-        this.logger.error(response.statusText);
-        throw new error(
-          `getting all listings from ${this.url} failed with a status code of ${response.status} - ${response.statusText}`
-        );
-      }
-    }
-    await this.logger.info(`RESPONSE: \n ${response}`);
-    return response.data.items;
+    const listings: Listing[] = await this.doorwayInterface.get("/listings");
+
+    this.logger.debug("Here are the listings: ");
+    await this.logger.debug(listings);
+    return listings;
   }
   async listingMatcher(
     match: string,
-    threshold: number = 0.25
+    threshold: number = 0.7
   ): Promise<Listing> {
     this.logger.debug("Getting all the listings.");
     const listings = await this.getAllListings();
@@ -66,6 +53,8 @@ export class ListingsInterface {
       threshold: threshold,
     });
     let result = await fuse.search(match);
+    this.logger.info(`${result.length} matches found`);
+    this.logger.debug(result[0].score);
 
     if (result.length == 0) {
       throw new MatchingError({

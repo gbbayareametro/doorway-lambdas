@@ -4,14 +4,13 @@ import { instance } from "./winston.logger";
 
 export class DoorwayInterface {
   url: string;
-  passkey: string;
   user: string;
   password: string;
   logger: typeof instance;
   doorwayLogin: DoorwayLogin;
-  constructor(user: string, password: string, url: string, passkey: string) {
-    this.url = `${url}/applications`;
-    this.passkey = passkey;
+  constructor(user: string, password: string, url: string) {
+    this.url = url;
+
     this.user = user;
     this.password = password;
     this.logger = instance;
@@ -39,7 +38,7 @@ export class DoorwayInterface {
       } catch (getError) {
         if (axios.isAxiosError(getError)) {
           this.logger.error(
-            `Get from ${getURL} failed with an error code of ${getError.code}`,
+            `Get from ${getURL} failed with an error code of ${getError.code}`
           );
           this.logger.error(getError.message);
           throw getError;

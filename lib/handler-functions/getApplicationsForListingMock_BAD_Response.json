@@ -30,12 +30,12 @@
       "applicationsMailingAddress": {
         "id": "3178ad8b-9899-4e68-a278-1fa8349a05b7",
         "placeName": null,
-        "city": "Moab",
+        "city": "Chicago",
         "county": null,
-        "state": "UT",
+        "state": "IL",
         "street": "25 E Center St",
         "street2": "",
-        "zipCode": "84532",
+        "zipCode": "60640",
         "latitude": null,
         "longitude": null
       },
@@ -74,12 +74,12 @@
         "applicantWorkAddress": {
           "id": "7e4fc84c-82f1-4103-a05e-ad9181d234db",
           "placeName": null,
-          "city": "",
+          "city": "Chicago",
           "county": null,
           "state": "",
           "street": "",
           "street2": "",
-          "zipCode": "",
+          "zipCode": "60640",
           "latitude": null,
           "longitude": null
         },
@@ -91,7 +91,7 @@
           "state": "CA",
           "street": "9035 Village Dr",
           "street2": "",
-          "zipCode": "95389",
+          "zipCode": "60640",
           "latitude": null,
           "longitude": null
         }
@@ -113,7 +113,7 @@
           "state": "WY",
           "street": "3200 Old Faithful Inn Rd",
           "street2": "",
-          "zipCode": "82190",
+          "zipCode": "60640",
           "latitude": null,
           "longitude": null
         }
@@ -173,7 +173,7 @@
         "state": "UT",
         "street": "25 E Center St",
         "street2": null,
-        "zipCode": "84532",
+        "zipCode": "60640",
         "latitude": 38.6190099,
         "longitude": -109.6969108
       },
@@ -201,7 +201,7 @@
           "state": "CA",
           "street": "9035 Village Dr",
           "street2": null,
-          "zipCode": "95389",
+          "zipCode": "60640",
           "latitude": 37.7487501,
           "longitude": -119.5920354
         },
@@ -213,7 +213,7 @@
           "state": "CO",
           "street": "1000 US-36",
           "street2": null,
-          "zipCode": "80517",
+          "zipCode": "60640",
           "latitude": 40.3800984,
           "longitude": -105.5709864
         }
@@ -235,7 +235,7 @@
           "state": "CA",
           "street": "9035 Village Dr",
           "street2": null,
-          "zipCode": "95389",
+          "zipCode": "60640",
           "latitude": 37.7487501,
           "longitude": -119.5920354
         }
@@ -282,7 +282,7 @@
         "state": "WY",
         "street": "3200 Old Faithful Inn Rd",
         "street2": null,
-        "zipCode": "82190",
+        "zipCode": "60640",
         "latitude": 44.45992857666182,
         "longitude": -110.8310921148768
       },
@@ -405,7 +405,7 @@
         "state": "UT",
         "street": "25 E Center St",
         "street2": "",
-        "zipCode": "84532",
+        "zipCode": "60640",
         "latitude": null,
         "longitude": null
       },
@@ -543,7 +543,7 @@
         "state": "CA",
         "street": "9035 Village Dr",
         "street2": null,
-        "zipCode": "95389",
+        "zipCode": "60640",
         "latitude": 37.7487501,
         "longitude": -119.5920354
       },

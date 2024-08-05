@@ -50,17 +50,17 @@ export class DoorwayPaperApplications {
     this.logger = instance;
     this.doorwayLogin = new DoorwayLogin(user, password, url);
     this.unitTypeService = new UnitTypeService(url, user, password);
-    this.listingsService = new ListingsInterface(url, passkey);
+    this.listingsService = new ListingsInterface(user, password, url, passkey);
   }
   async submit(
-    application: PaperApplication,
+    application: PaperApplication
   ): Promise<AxiosResponse<any, any>> {
     this.logger.info("Submittng paper Application to Doorway API");
     this.logger.debug(application);
     axios.defaults.withCredentials = true;
     const tokens = await this.doorwayLogin.login();
     this.logger.info(
-      `Submitting application for listing ${application.listings.id}`,
+      `Submitting application for listing ${application.listings.id}`
     );
     const response = axios.post(this.url, application, {
       headers: {
@@ -73,7 +73,7 @@ export class DoorwayPaperApplications {
   }
   isValid(application: object): boolean {
     const appSchema = JSON.parse(
-      fs.readFileSync("./lib/handler-functions/applicationSchema.json", "utf8"),
+      fs.readFileSync("./lib/handler-functions/applicationSchema.json", "utf8")
     );
 
     const validator = new Validator();
@@ -122,12 +122,12 @@ export class DoorwayPaperApplications {
       applicant.lastName = inputJson.applicant.lastName;
       const additionalPhone: PhoneNumber | undefined = parsePhoneNumber(
         inputJson.applicant.phoneNumber,
-        "US",
+        "US"
       );
       paperApp.additionalPhoneNumber =
-        additionalPhone != undefined ? additionalPhone.number : "";
+        additionalPhone != undefined ? additionalPhone.formatNational() : "";
       this.logger.debug(
-        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`,
+        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`
       );
 
       if (paperApp.additionalPhoneNumber != "") {
@@ -143,9 +143,10 @@ export class DoorwayPaperApplications {
       }
       const phone: PhoneNumber | undefined = parsePhoneNumber(
         inputJson.applicant.phoneNumber,
-        "US",
+        "US"
       );
-      paperApp.applicant.phoneNumber = phone != undefined ? phone.number : "";
+      paperApp.applicant.phoneNumber =
+        phone != undefined ? phone.formatNational() : "";
       if (inputJson.applicant.primaryPhoneIsMobile == "True") {
         applicant.phoneNumberType = "cell";
       } else if (inputJson.applicant.primaryPhoneIsWork == "True") {
@@ -188,12 +189,12 @@ export class DoorwayPaperApplications {
         inputJson.alternateContact.otherType;
       const altContactPhone: PhoneNumber | undefined = parsePhoneNumber(
         inputJson.alternateContact.phoneNumber,
-        "US",
+        "US"
       );
       paperApp.alternateContact.phoneNumber =
-        altContactPhone != undefined ? altContactPhone.number : "";
+        altContactPhone != undefined ? altContactPhone.formatNational() : "";
       this.logger.debug(
-        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`,
+        `Additional Phone Number: ${paperApp.additionalPhoneNumber}`
       );
 
       if (inputJson.alternateContact.altContactFamily == "True") {
@@ -422,23 +423,23 @@ export class DoorwayPaperApplications {
     const unitTypes: UnitType[] = await this.unitTypeService.getUnitTypes();
     this.logger.debug(unitTypes);
     const studio = unitTypes.find(
-      (unitType: UnitType) => unitType.name === "studio",
+      (unitType: UnitType) => unitType.name === "studio"
     );
     this.logger.debug(studio);
     const oneBr = unitTypes.find(
-      (unitType: UnitType) => unitType.name === "oneBdrm",
+      (unitType: UnitType) => unitType.name === "oneBdrm"
     );
     this.logger.debug(oneBr);
     const twoBr = unitTypes.find(
-      (unitType: UnitType) => unitType.name === "twoBdrm",
+      (unitType: UnitType) => unitType.name === "twoBdrm"
     );
     this.logger.debug(twoBr);
     const threeBr = unitTypes.find(
-      (unitType: UnitType) => unitType.name === "threeBdrm",
+      (unitType: UnitType) => unitType.name === "threeBdrm"
     );
     this.logger.debug(threeBr);
     const fourBr = unitTypes.find(
-      (unitType: UnitType) => unitType.name == "fourBdrm",
+      (unitType: UnitType) => unitType.name == "fourBdrm"
     );
     this.logger.debug(fourBr);
 
@@ -450,13 +451,11 @@ export class DoorwayPaperApplications {
       this.logger.debug(preferredUnitTypes);
     }
     if (inputJson.preferredUnitTypes["1BR"] === "True") {
-      this.logger.debug("I GOT HERE!!!");
       preferredUnitTypes.push({ id: oneBr!.id });
       this.logger.debug(oneBr?.id);
       this.logger.debug(preferredUnitTypes);
     }
     if (inputJson.preferredUnitTypes["2BR"] === "True") {
-      this.logger.debug("I GOT HERE!!!!");
       preferredUnitTypes.push({ id: twoBr!.id });
       this.logger.debug(twoBr!.id);
       this.logger.debug(preferredUnitTypes);
@@ -510,7 +509,7 @@ export class DoorwayPaperApplications {
     paperApp.listings.id = inputJson.listings.id;
     const listing = await this.listingsService.getListing(paperApp.listings.id);
     this.logger.info(
-      `Listing requested is ${listing.id} and is in status ${listing.status}`,
+      `Listing requested is ${listing.id} and is in status ${listing.status}`
     );
     if (listing.listingMultiselectQuestions != undefined) {
       const prefNames: object[] = [];
@@ -521,7 +520,7 @@ export class DoorwayPaperApplications {
             id: question.multiselectQuestions.id,
             description: question.multiselectQuestions.description,
           });
-        },
+        }
       );
       const listingSearch = new Fuse(prefNames, {
         keys: ["name", "description"],

@@ -1,78 +1,88 @@
 {
   "status": "draft",
   "submissionType": "paper",
-  "submissionDate": "2024-07-25T17:51:00.4555455Z",
+  "householdExpectingChanges": "False",
+  "householdStudent": "False",
+  "submissionDate": "2024-07-31T23:18:28.2554110Z",
   "contactByEmail": "False",
   "contactByPhone": "False",
   "contactByLetter": "True",
-  "householdSize": "7",
-  "income": "",
+  "householdSize": "2",
+  "income": "32008",
+  "incomeVouchers": {
+    "Section8": "True",
+    "rentalAssistance": "False"
+  },
+  "additionalPhone": "925-330-9270",
+  "additionalPhoneIsMobile": "False",
+  "additionalPhoneIsWork": "False",
+  "additionalPhoneIsHome": "False",
   "listings": {
-    "id": "cbc967c6-34d4-4d28-ae77-76a6bf3189d7"
+    "id": "74d3c630-8a46-4b81-940a-d99e2f26ccce"
   },
   "applicant": {
-    "firstName": "Gloria",
-    "middleName": "M",
-    "lastName": "Khan",
-    "dateOfBirth": "1990-05-05T00:00:00Z",
-    "emailAddress": "egyptianqueen@hotmail.com",
-    "phoneNumber": "714-489-3870",
-    "primaryPhoneIsMobile": "True",
+    "firstName": "fakefirst",
+    "middleName": "fakemiddle",
+    "lastName": "fakelast",
+    "dateOfBirth": "1929-12-15T00:00:00Z",
+    "emailAddress": "fakeperson@fakeperson.com",
+    "phoneNumber": "925-555-5555",
+    "primaryPhoneIsMobile": "False",
     "primaryPhoneIsHome": "False",
     "primaryPhoneIsWork": "False",
     "applicantAddress": {
-      "street": "63 Whispering Pine",
-      "street2": "E",
-      "city": "Roseville",
+      "street": "123 fake street",
+      "street2": "123",
+      "city": "Albany",
       "state": "CA",
-      "zipCode": "92650"
+      "zipCode": "94760"
     },
-    "workInRegion": "True"
+    "workInRegion": "False"
   },
   "applicationsMailingAddress": {
-    "street": "55 Photinia",
-    "street2": "26",
-    "city": "Long Beach",
-    "state": "CA",
-    "zipCode": "95161"
+    "street": "",
+    "street2": "",
+    "city": "",
+    "state": "",
+    "zipCode": ""
   },
   "alternateContact": {
     "altContactFamily": "False",
-    "altContactIsFriend": "True",
-    "altContactIsSW": "False",
+    "altContactIsFriend": "False",
+    "altContactIsSW": "True",
     "altContactIsOther": "False",
 
     "otherType": "",
-    "firstName": "Beth",
-    "lastName": "Farnsworth",
+    "firstName": "fakealtfirst",
+    "lastName": "fakealtlast",
     "address": {
-      "street": "",
+      "street": "246 fake st",
       "street2": "",
-      "city": "",
-      "state": "",
-      "zipCode": ""
+      "city": "Albany",
+      "state": "ca",
+      "zipCode": "94760"
     },
-    "agency": "",
-    "phoneNumber": "",
-    "emailAddress": ""
+    "agency": "Fake Agency",
+    "phoneNumber": "925-555-5555",
+    "emailAddress": "fakealt@fakealt.com"
   },
   "demographics": {
     "race": {
-      "Asian": "True",
+      "Asian": "False",
       "Latino": "False",
-      "White": "False",
+      "White": "True",
       "Black": "False",
       "Indigenous": "False",
       "MiddleEastern": "False",
       "PacIsland": "False"
     },
     "ethnicity": {
-      "AfricanAmerican": ":unselected:",
+      "AfricanAmerican": "False",
       "Chinese": "False",
       "Filipino": "False",
       "Japanese": "False",
       "Korean": "False",
-      "Mongolian": "True",
+      "Mongolian": "False",
       "Vietnamese": "False",
       "CenAsian": "False",
       "SouthAsian": "False",
@@ -80,13 +90,13 @@
       "OtherAsian": "False",
       "African": "False",
       "BlackCaribbean": "False",
-      "OtherBlack": "",
+      "OtherBlack": "False",
       "LatinoCaribbean": "False",
       "CenAmer": "False",
       "Mexican": "False",
       "SouthAmer": "False",
       "OtherLatino": "False",
-      "European": "False",
+      "European": "True",
       "OtherWhite": "False",
       "Alaskan": "False",
       "AmerInd": "False",
@@ -102,12 +112,12 @@
     },
 
     "gender": {
-      "Male": "False",
+      "Male": "True",
       "Female": "False",
       "TransMan": "False",
       "TransWoman": "False",
       "GenderQueer": "False",
-      "GenderOther": "True",
+      "GenderOther": "False",
       "GenderUnsure": "False"
     },
     "sexualOrientation": {
@@ -136,23 +146,21 @@
     "vision": "False",
     "hearing": "False"
   },
-  "preferredUnitTypes": [
-    {
-      "Studio": "False",
-      "1BR": "False",
-      "2BR": "False",
-      "3BR": "True",
-      "4BR": "False"
-    }
-  ],
+  "preferredUnitTypes": {
+    "Studio": "False",
+    "1BR": "True",
+    "2BR": "True",
+    "3BR": "False",
+    "4BR": "False"
+  },
   "householdMember": [
     {
-      "firstName": "Kurt",
-      "middleName": "A",
-      "lastName": "Coja",
-      "dateOfBirth": "2024-05-29T00:00:00Z",
+      "firstName": "Fakehouse1F",
+      "middleName": "fakehouse1M",
+      "lastName": "Fakehouse1L",
+      "dateOfBirth": "1950-09-23T00:00:00Z",
 
-      "relationship": "",
+      "relationship": "Spouse",
       "sameAddress": "yes"
     },
     {
@@ -175,12 +183,12 @@
     },
     {
       "firstName": "",
-      "middleName": "A",
+      "middleName": "",
       "lastName": "",
       "birthMonth": "",
       "relationship": "",
       "sameAddress": "yes"
     }
   ],
-  "preferences": [{ "name": "HOPWA", "value": "True" }]
+  "preferences": [{ "name": "HOPWA", "value": "False" }]
 }
