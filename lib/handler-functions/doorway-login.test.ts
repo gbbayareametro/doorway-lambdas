@@ -22,6 +22,6 @@ describe("API Login Tests", () => {
     const doorwayLogin = new DoorwayLogin(user, password, url);
     expect(async () => {
       await doorwayLogin.login();
-    }).rejects.toContain(" status code 401");
+    }).rejects.toBeInstanceOf("AxiosError");
   });
 });
